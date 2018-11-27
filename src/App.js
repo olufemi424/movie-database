@@ -1,8 +1,8 @@
 import React from "react";
-import "./App.css";
-import MoviesList from "./MoviesList";
-import MovieDetail from "./MovieDetail";
-import Header from "./Header";
+import "./css/App.css";
+import MoviesList from "./components/MoviesList";
+import MovieDetail from "./components/MovieDetail";
+import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App = () => (
