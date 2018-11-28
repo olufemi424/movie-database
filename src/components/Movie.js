@@ -1,17 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-const POSTER_PATH = "https://image.tmdb.org/t/p/w200";
+const POSTER_PATH = "https://image.tmdb.org/t/p/w154";
 
 const Movie = ({ movie }) => {
   return (
-    <div>
-      {/* <h3>{movie.title}</h3> */}
-      <Link to={`${movie.id}`}>
-        <img src={`${POSTER_PATH}${movie.poster_path}`} alt="back drop path" />
-      </Link>
-    </div>
+    <Link to={`${movie.id}`}>
+      <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt="back drop path" />
+    </Link>
   );
 };
 
@@ -28,3 +26,7 @@ Movie.propTypes = {
 Movie.defaultProps = {
   desc: "Description not available"
 };
+
+export const Poster = styled.img`
+  box-shadow: 0 0 35px black;
+`;
