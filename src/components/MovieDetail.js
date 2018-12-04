@@ -61,9 +61,13 @@ const MovieInfo = styled.div`
   background: white;
   text-align: left;
   padding: 2rem 10%;
-  display: flex;
+  // display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+
   > .info {
-    margin-left: 20px;
+    margin-left: -40%;
+    // margin-left: 30px;
   }
 
   .ratingContainer {

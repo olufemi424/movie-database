@@ -25,13 +25,11 @@ class MoviesList extends Component {
 
   render() {
     return (
-      <div>
-        <MovieGrid>
-          {this.state.movies.map(movie => (
-            <Movie movie={movie} key={movie.id} />
-          ))}
-        </MovieGrid>
-      </div>
+      <MovieGrid>
+        {this.state.movies.map(movie => (
+          <Movie movie={movie} key={movie.id} />
+        ))}
+      </MovieGrid>
     );
   }
 }
@@ -39,8 +37,8 @@ class MoviesList extends Component {
 export default MoviesList;
 
 const MovieGrid = styled.div`
-  display: grid;
+  // display: grid;
   padding: 1rem;
-  grid-template-columns: repeat(6, 1fr);
-  grid-row-gap: 1rem;
+  // grid-template-columns: repeat(6, 1fr);
+  // grid-row-gap: 1rem;
 `;
