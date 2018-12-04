@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Poster } from "./Movie";
 import styled from "styled-components";
+import Overdrive from "react-overdrive";
 
-const POSTER_PATH = "https://image.tmdb.org/t/p/w154";
-const BACKDROP_PATH = "https://image.tmdb.org/t/p/w1280";
+const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
+const BACKDROP_PATH = "http://image.tmdb.org/t/p/w1280";
 
 class MovieDetail extends Component {
   state = {
@@ -33,7 +34,9 @@ class MovieDetail extends Component {
     return (
       <MovieWrapper backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
         <MovieInfo>
-          <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt="Poster" />
+          <Overdrive id={`${movie.id}`}>
+            <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt="Poster" />
+          </Overdrive>
           <div className="info">
             <h1>{movie.title}</h1>
             <h3>
@@ -55,19 +58,18 @@ const MovieWrapper = styled.div`
   padding-top: 50vh;
   background: url(${props => props.backdrop}) no-repeat;
   background-size: cover;
+  background-position: center;
 `;
 
 const MovieInfo = styled.div`
   background: white;
   text-align: left;
   padding: 2rem 10%;
-  // display: flex;
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(2, 2fr);
 
   > .info {
-    margin-left: -40%;
-    // margin-left: 30px;
+    margin-left: 30px;
   }
 
   .ratingContainer {
