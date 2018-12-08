@@ -3,32 +3,42 @@ import Movie from "./Movie";
 import MovieGrid from "./MovieDetail";
 import styled from "styled-components";
 
+const baseURL = "https://api.themoviedb.org/3/";
+
 class Search extends Component {
-  constructor() {
-    super();
-    // this.state = {
-    //   search: "Jaw"
-    // };
-  }
-  // state = {
-  //   movies: []
-  // };
-  // async componentDidMount() {
-  //   // try to fetch data
-  //   try {
-  //     const res = await fetch(
-  //       "https://api.themoviedb.org/3/discover/movie?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"
-  //     );
-  //     const movies = await res.json();
-  //     //set state to the reseult object
-  //     this.setState({
-  //       movies: movies.results
-  //     });
-  //     //catch the error
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
+  state = {
+    keyword: "",
+    movie: ""
+  };
+
+  updateInputValue = e => {
+    this.setState({
+      keyword: e.target.value
+    });
+  };
+
+  searchMovie = (e, movie) => {
+    e.preventDefault();
+    // console.log(this.state.keyword);
+    this.runSearch();
+  };
+
+  runSearch = state => {
+    let url = "".concat(
+      baseURL,
+      "search/movie?api_key=",
+      "56cbdfc579474a601e5ee545721a625f&language=en-US",
+      "&query=",
+      this.state.keyword
+    );
+    fetch(url)
+      .then(result => result.json())
+      .then(data => {
+        this.setState({
+          movie: data.results[0].title
+        });
+      });
+  };
 
   render() {
     return (
@@ -40,15 +50,15 @@ class Search extends Component {
               className="input"
               id="addInput"
               placeholder="Enter Movie Name.."
+              value={this.state.keyword}
+              onChange={this.updateInputValue}
             />
-            <button className="button is-info">Search</button>
+            <button onClick={this.searchMovie} className="button is-info">
+              Search
+            </button>
           </form>
         </section>
-        {/* <MovieGrid>
-          {this.state.movies.map(movie => (
-            <Movie movie={movie} key={movie.id} />
-          ))}
-        </MovieGrid> */}
+        <div>{this.state.movie}</div>
       </SearchStyle>
     );
   }

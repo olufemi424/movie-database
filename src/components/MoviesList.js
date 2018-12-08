@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Movie from "./Movie";
 import styled from "styled-components";
+import Search from "./Search";
 
 class MoviesList extends Component {
   state = {
@@ -25,11 +26,14 @@ class MoviesList extends Component {
 
   render() {
     return (
-      <MovieGrid>
-        {this.state.movies.map(movie => (
-          <Movie movie={movie} key={movie.id} />
-        ))}
-      </MovieGrid>
+      <React.Fragment>
+        <Search />
+        <MovieGrid>
+          {this.state.movies.map(movie => (
+            <Movie movie={movie} key={movie.id} />
+          ))}
+        </MovieGrid>
+      </React.Fragment>
     );
   }
 }
