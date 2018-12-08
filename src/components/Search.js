@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Movie from "./Movie";
-import MovieGrid from "./MovieDetail";
+// import Movie from "./Movie";
+// import MovieGrid from "./MovieDetail";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const baseURL = "https://api.themoviedb.org/3/";
@@ -8,7 +9,7 @@ const baseURL = "https://api.themoviedb.org/3/";
 class Search extends Component {
   state = {
     keyword: "",
-    movie: ""
+    movies: []
   };
 
   updateInputValue = e => {
@@ -19,7 +20,6 @@ class Search extends Component {
 
   searchMovie = (e, movie) => {
     e.preventDefault();
-    // console.log(this.state.keyword);
     this.runSearch();
   };
 
@@ -35,7 +35,7 @@ class Search extends Component {
       .then(result => result.json())
       .then(data => {
         this.setState({
-          movie: data.results[0].title
+          movies: data.results
         });
       });
   };
@@ -58,7 +58,11 @@ class Search extends Component {
             </button>
           </form>
         </section>
-        <div>{this.state.movie}</div>
+        <div>
+          {this.state.movies.map(movie => (
+            <h4 key={movie.id}>{movie.title}</h4>
+          ))}
+        </div>
       </SearchStyle>
     );
   }
