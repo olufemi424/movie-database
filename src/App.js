@@ -5,7 +5,7 @@ import MovieDetail from "./components/MovieDetail";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Search from "./components/Search";
+import SearchResults from "./components/SearchResults";
 
 const App = () => (
   <Router>
@@ -13,7 +13,6 @@ const App = () => (
       <Header />
       <Switch>
         <Route exact path="/" component={MoviesList} />
-        <Route path="/:title" component={Search} />
         <Route path="/:id" component={MovieDetail} />
       </Switch>
       <Footer />

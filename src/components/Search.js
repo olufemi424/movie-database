@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-// import Movie from "./Movie";
-// import MovieGrid from "./MovieDetail";
-// import { Link } from "react-router-dom";
 import styled from "styled-components";
+import SearchResults from "./SearchResults";
 
 const baseURL = "https://api.themoviedb.org/3/";
 
 class Search extends Component {
-  state = {
-    keyword: "",
-    movies: []
-  };
+  constructor() {
+    super();
+    this.state = {
+      keyword: "",
+      movies: []
+    };
+  }
 
   updateInputValue = e => {
     this.setState({
@@ -18,26 +19,24 @@ class Search extends Component {
     });
   };
 
-  searchMovie = (e, movie) => {
-    e.preventDefault();
-    this.runSearch();
-  };
-
-  runSearch = state => {
-    let url = "".concat(
-      baseURL,
-      "search/movie?api_key=",
-      "56cbdfc579474a601e5ee545721a625f&language=en-US",
-      "&query=",
-      this.state.keyword
-    );
-    fetch(url)
-      .then(result => result.json())
-      .then(data => {
-        this.setState({
-          movies: data.results
+  componentDidMount = () => {
+    this.runSearch = state => {
+      let url = "".concat(
+        baseURL,
+        "search/movie?api_key=",
+        "56cbdfc579474a601e5ee545721a625f&language=en-US",
+        "&query=",
+        this.state.keyword
+      );
+      // try to fetch data
+      fetch(url)
+        .then(result => result.json())
+        .then(data => {
+          this.setState({
+            movies: data.results
+          });
         });
-      });
+    };
   };
 
   render() {
@@ -53,16 +52,12 @@ class Search extends Component {
               value={this.state.keyword}
               onChange={this.updateInputValue}
             />
-            <button onClick={this.searchMovie} className="button is-info">
+            <button onClick={this.runSearch} className="button is-info">
               Search
             </button>
           </form>
         </section>
-        <div>
-          {this.state.movies.map(movie => (
-            <h4 key={movie.id}>{movie.title}</h4>
-          ))}
-        </div>
+        <SearchResults movies={this.state.movies} />
       </SearchStyle>
     );
   }
