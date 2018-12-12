@@ -15,7 +15,7 @@ class MovieDetail extends Component {
     try {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${
-          this.props.match.params.id
+        this.props.match.params.id
         }?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US`
       );
 
@@ -26,12 +26,11 @@ class MovieDetail extends Component {
       });
 
       //catch the error
-    } catch (e) {}
+    } catch (e) { console.log(e) }
   }
 
   render() {
     const { movie } = this.state;
-    console.log(movie);
     return (
       <MovieWrapper backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
         <MovieInfo>
