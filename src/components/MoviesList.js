@@ -1,12 +1,9 @@
-import React, {
-  Component
-} from "react";
+import React, { Component } from "react";
 import Movie from "./Movie";
 import styled from "styled-components";
 import Search from "./Search";
 
 const baseURL = "https://api.themoviedb.org/3/";
-
 
 class MoviesList extends Component {
   constructor(props) {
@@ -22,12 +19,12 @@ class MoviesList extends Component {
     // try to fetch data
     try {
       const res = await fetch(
-        "https://api.themoviedb.org/3/discover/movie?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"
+        `${baseURL}movie/now_playing?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US&page=1`
       );
       const movies = await res.json();
       //set state to the reseult object
       this.setState({
-        keyword: '',
+        keyword: "",
         movies: movies.results
       });
       //catch the error
@@ -40,12 +37,9 @@ class MoviesList extends Component {
     this.setState({
       keyword: val
     });
-
-    console.log(this.state.keyword)
-
   };
 
-  movieSearch = (e) => {
+  movieSearch = e => {
     let url = "".concat(
       baseURL,
       "search/movie?api_key=",
@@ -65,10 +59,17 @@ class MoviesList extends Component {
 
   render() {
     return (
-      <React.Fragment >
-        <Search movieSearch={this.movieSearch} updateInputValue={this.updateInputValue} />
-        <MovieGrid >{this.state.movies.map(movie => (<Movie movie={movie} key={movie.id} />))} </MovieGrid>
-      </React.Fragment >
+      <React.Fragment>
+        <Search
+          movieSearch={this.movieSearch}
+          updateInputValue={this.updateInputValue}
+        />
+        <MovieGrid>
+          {this.state.movies.map(movie => (
+            <Movie movie={movie} key={movie.id} />
+          ))}
+        </MovieGrid>
+      </React.Fragment>
     );
   }
 }
@@ -76,8 +77,9 @@ class MoviesList extends Component {
 export default MoviesList;
 
 export const MovieGrid = styled.div`
-      display: grid;
-      padding: 1rem;
-      grid-template-columns: repeat(6, 1fr);
-      grid-row-gap: 1rem;
+  display: grid;
+  padding-top: 0.3rem;
+  grid-template-columns: repeat(5, 1fr);
+  grid-row-gap: 1rem;
+  // overflow: hidden;
 `;
