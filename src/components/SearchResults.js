@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Movie from "./Movie";
-import { MovieGrid } from "./MoviesList";
 
 class SearchResults extends Component {
   render() {
@@ -10,7 +9,7 @@ class SearchResults extends Component {
         return <Movie movie={movie} key={movie.id} />;
       });
     }
-    return <MovieGrid>{movieResults}</MovieGrid>;
+    return <div>{movieResults}</div>;
   }
 }
 

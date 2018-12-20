@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Poster } from "./Movie";
 import styled from "styled-components";
 import Overdrive from "react-overdrive";
 
@@ -15,7 +14,7 @@ class MovieDetail extends Component {
     try {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${
-        this.props.match.params.id
+          this.props.match.params.id
         }?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US`
       );
 
@@ -26,7 +25,9 @@ class MovieDetail extends Component {
       });
 
       //catch the error
-    } catch (e) { console.log(e) }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
@@ -35,7 +36,7 @@ class MovieDetail extends Component {
       <MovieWrapper backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
         <MovieInfo>
           <Overdrive id={`${movie.id}`}>
-            <Poster src={`${POSTER_PATH}${movie.poster_path}`} alt="Poster" />
+            <img src={`${POSTER_PATH}${movie.poster_path}`} alt="Poster" />
           </Overdrive>
           <div className="info">
             <h1>{movie.title}</h1>

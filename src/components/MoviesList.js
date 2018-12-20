@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Movie from "./Movie";
-import styled from "styled-components";
 import Search from "./Search";
 
 const baseURL = "https://api.themoviedb.org/3/";
@@ -60,26 +59,20 @@ class MoviesList extends Component {
   render() {
     return (
       <React.Fragment>
-        <Search
-          movieSearch={this.movieSearch}
-          updateInputValue={this.updateInputValue}
-        />
-        <MovieGrid>
-          {this.state.movies.map(movie => (
-            <Movie movie={movie} key={movie.id} />
-          ))}
-        </MovieGrid>
+        <div className="container">
+          <Search
+            movieSearch={this.movieSearch}
+            updateInputValue={this.updateInputValue}
+          />
+          <div className="row mt-4">
+            {this.state.movies.map(movie => (
+              <Movie key={movie.id} movie={movie} />
+            ))}
+          </div>
+        </div>
       </React.Fragment>
     );
   }
 }
 
 export default MoviesList;
-
-export const MovieGrid = styled.div`
-  display: grid;
-  padding-top: 0.3rem;
-  grid-template-columns: repeat(5, 1fr);
-  grid-row-gap: 1rem;
-  // overflow: hidden;
-`;
