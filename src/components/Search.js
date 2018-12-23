@@ -3,19 +3,12 @@ import styled from "styled-components";
 import SearchResults from "./SearchResults";
 
 class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // keyword: "",
-      movies: []
-    };
+  state = {
+    movies: []
+  };
 
-    this.movieSearch = this.movieSearch.bind(this);
-    this.updateInputValue = this.updateInputValue.bind(this);
-  }
-
-  updateInputValue = e => {
-    this.props.updateInputValue(e.target.value);
+  handleChange = e => {
+    this.props.handleChange(e.target.value);
   };
 
   movieSearch = e => {
@@ -26,18 +19,16 @@ class Search extends Component {
   render() {
     return (
       <SearchStyle>
-        <section className="section">
-          <form className="form" id="addItemForm">
-            <button onClick={this.movieSearch} className="button is-info">
-              Search Movie
-            </button>
+        <section>
+          <form>
+            <button onClick={this.movieSearch}>Search</button>
             <input
               type="text"
               className="input"
               id="addInput"
               placeholder="Enter Movie Name.."
               value={this.value}
-              onChange={this.updateInputValue}
+              onChange={this.handleChange}
             />
           </form>
         </section>
@@ -51,21 +42,29 @@ export default Search;
 
 export const SearchStyle = styled.div`
   input {
-    font-size: 16px;
+    font-size: 19px;
     padding: 12px;
     margin-top: 15px;
     outline: none;
     width: 70%;
     border: 0;
+    border-radius: 5px;
   }
   button {
-    font-size: 16px;
+    text-transform: uppercase;
+    font-size: 19px;
     padding: 12px;
     margin-right: 10px;
-    background-color: #222;
+    background-color: #353a3f;
     color: #f4f4f4;
     outline: none;
     cursor: pointer;
+    border-radius: 5px;
+    letter-spacing: 2px;
+  }
+
+  button:hover {
+    background-color: #4c5054;
   }
 
   @media (max-width: 600px) {

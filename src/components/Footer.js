@@ -22,12 +22,21 @@ const FooterStyle = styled.div`
   background: #222;
   height: 60px;
   padding: 10px;
-  color: #fff;
+  color: #f4f4f4;
+  font-weight: 200;
+  p {
+    font-size: 20px;
+  }
   .light {
-    font-weight: 200;
     color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
+  }
+  @media (max-width: 600px) {
+    p {
+      font-size: 14px;
+      padding: 5px;
+    }
   }
 `;

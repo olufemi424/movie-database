@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Movie from "./Movie";
 
-class SearchResults extends Component {
+class MoviesResult extends Component {
   render() {
     let movieResults;
     if (this.props.movies) {
@@ -9,8 +9,12 @@ class SearchResults extends Component {
         return <Movie movie={movie} key={movie.id} />;
       });
     }
-    return <div>{movieResults}</div>;
+    return (
+      <div className="row mt-4">
+        <div>{movieResults}</div>
+      </div>
+    );
   }
 }
 
-export default SearchResults;
+export default MoviesResult;

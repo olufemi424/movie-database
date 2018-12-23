@@ -8,27 +8,24 @@ const BACKDROP_PATH = "http://image.tmdb.org/t/p/w1280";
 class MovieDetail extends Component {
   state = {
     movie: {}
+    // activeovie: {}
   };
-  async componentDidMount() {
-    // try to fetch data
+
+  componentWillMount = async () => {
+    const id = this.props.match.params.id;
+    // fetch data
     try {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${
-          this.props.match.params.id
-        }?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US`
       );
-
       const movie = await res.json();
-      //set state to the reseult object
       this.setState({
         movie: movie
       });
-
-      //catch the error
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   render() {
     const { movie } = this.state;
