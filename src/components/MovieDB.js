@@ -19,14 +19,19 @@ class MoviesList extends Component {
     page: 1,
     keyword: ""
   };
+  _isMounted = false;
 
   componentDidMount = () => {
+    this._isMounted = true;
     this.getMovies();
   };
 
   componentDidUpdate = () => {
-    console.log(this.state);
-    // this.getMovies();
+    this.getMovies();
+  };
+
+  componentWillUnmount = () => {
+    this._isMounted = false;
   };
 
   //get movies
@@ -38,10 +43,12 @@ class MoviesList extends Component {
         }`
       );
       const movies = await res.json();
-      this.setState({
-        keyword: "",
-        movies: movies.results
-      });
+      if (this._isMounted) {
+        this.setState({
+          keyword: "",
+          movies: movies.results
+        });
+      }
     } catch (error) {
       console.log(error);
     }
