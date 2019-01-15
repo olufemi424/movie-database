@@ -36,7 +36,7 @@ class MovieDetail extends Component {
             <img src={`${POSTER_PATH}${movie.poster_path}`} alt="Poster" />
           </Overdrive>
           <div className="info">
-            <h1>{movie.title}</h1>
+            <h2>{movie.title}</h2>
             <h3>
               Rating <span className="rating">{movie.vote_average}</span>
             </h3>

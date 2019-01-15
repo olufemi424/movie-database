@@ -2,23 +2,18 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Search from "./Search";
 import MoviesResult from "./MoviesResult";
+// import Carousel from "./Carousel";
 
 const baseURL = "https://api.themoviedb.org/3/";
 const API_KEY = "56cbdfc579474a601e5ee545721a625f";
 
 class MoviesList extends Component {
-  constructor(props) {
-    super(props);
-    this.movieSearch = this.movieSearch.bind(this);
-    this.getMovies = this.getMovies.bind(this);
-    this.updateInputValue = this.updateInputValue.bind(this);
-  }
-
   state = {
     movies: [],
     page: 1,
     keyword: ""
   };
+
   _isMounted = false;
 
   componentDidMount = () => {
@@ -104,6 +99,7 @@ class MoviesList extends Component {
   render() {
     return (
       <React.Fragment>
+        {/* <Carousel movies={this.state.movies} /> */}
         <div className="container">
           <Search
             movieSearch={this.movieSearch}
