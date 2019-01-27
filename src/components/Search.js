@@ -1,38 +1,37 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import SearchResults from "./SearchResults";
 
 class Search extends Component {
   state = {
-    movies: []
+    keyword: ""
   };
 
   handleChange = e => {
-    this.props.handleChange(e.target.value);
+    this.setState({
+      keyword: e.target.value
+    });
   };
 
   movieSearch = e => {
     e.preventDefault();
-    this.props.movieSearch();
+    this.props.movieSearch(this.state.keyword);
   };
 
   render() {
     return (
       <SearchStyle>
         <section>
-          <form>
-            <button onClick={this.movieSearch}>Search</button>
+          <form onSubmit={this.movieSearch}>
             <input
               type="text"
               className="input"
-              id="addInput"
+              id="keyword"
               placeholder="Enter Movie Name.."
-              value={this.value}
               onChange={this.handleChange}
             />
+            <button>Search</button>
           </form>
         </section>
-        <SearchResults movies={this.state.movies} />
       </SearchStyle>
     );
   }
@@ -54,7 +53,7 @@ export const SearchStyle = styled.div`
     text-transform: uppercase;
     font-size: 19px;
     padding: 12px;
-    margin-right: 10px;
+    margin-left: 10px;
     background-color: #353a3f;
     color: #f4f4f4;
     outline: none;

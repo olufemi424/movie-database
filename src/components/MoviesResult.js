@@ -3,7 +3,7 @@ import Movie from "./Movie";
 
 class SearchResults extends Component {
   render() {
-    let movieResults = this.props.movies;
+    let movieResults;
     if (this.props.movies) {
       movieResults = this.props.movies.map(movie => {
         return (
@@ -12,6 +12,8 @@ class SearchResults extends Component {
           </div>
         );
       });
+    } else {
+      return <div className="text-light py-5">No Movie Found</div>;
     }
     return <div className="row mt-4">{movieResults}</div>;
   }

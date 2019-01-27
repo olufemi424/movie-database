@@ -15,7 +15,7 @@ export class Carousel extends Component {
           </div>
         </div>
       ) : (
-        <div>Loading</div>
+        <div>No backdrop</div>
       );
     });
     return (

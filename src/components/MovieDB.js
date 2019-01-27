@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Search from "./Search";
 import MoviesResult from "./MoviesResult";
-// import Carousel from "./Carousel";
+import Carousel from "./Carousel";
 
 const baseURL = "https://api.themoviedb.org/3/";
 const API_KEY = "56cbdfc579474a601e5ee545721a625f";
@@ -14,15 +14,9 @@ class MoviesList extends Component {
     keyword: ""
   };
 
-  _isMounted = false;
-
   componentDidMount = () => {
     this._isMounted = true;
-    this.getMovies();
-  };
-
-  componentDidUpdate = () => {
-    this.getMovies();
+    this.getMovies(this.state);
   };
 
   componentWillUnmount = () => {
@@ -30,11 +24,11 @@ class MoviesList extends Component {
   };
 
   //get movies
-  getMovies = async () => {
+  getMovies = async data => {
     try {
       const res = await fetch(
         `${baseURL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=${
-          this.state.page
+          data.page
         }`
       );
       const movies = await res.json();
@@ -49,34 +43,22 @@ class MoviesList extends Component {
     }
   };
 
-  //update value of state
-  updateInputValue = val => {
-    console.log(val);
-    this.setState({
-      keyword: val
-    });
-  };
-
   //get movie with search keyword
-  movieSearch = () => {
-    if (this.state.keyword === "") {
-      alert("Pls enter a movie name!");
-    } else {
-      let url = "".concat(
-        baseURL,
-        "search/movie?api_key=",
-        `${API_KEY}&language=en-US`,
-        "&query=",
-        this.state.keyword
-      );
-      fetch(url)
-        .then(result => result.json())
-        .then(data => {
-          this.setState({
-            movies: data.results
-          });
+  movieSearch = keyword => {
+    let url = "".concat(
+      baseURL,
+      "search/movie?api_key=",
+      `${API_KEY}&language=en-US`,
+      "&query=",
+      keyword
+    );
+    fetch(url)
+      .then(result => result.json())
+      .then(data => {
+        this.setState({
+          movies: data.results
         });
-    }
+      });
   };
 
   //next page
@@ -85,7 +67,7 @@ class MoviesList extends Component {
     this.setState({
       page: page + 1
     });
-    this.getMovies();
+    this.getMovies(this.state);
   };
 
   // prev page
@@ -94,6 +76,7 @@ class MoviesList extends Component {
     this.setState({
       page: page - 1
     });
+    this.getMovies(this.state);
   };
 
   render() {
@@ -101,10 +84,7 @@ class MoviesList extends Component {
       <React.Fragment>
         {/* <Carousel movies={this.state.movies} /> */}
         <div className="container">
-          <Search
-            movieSearch={this.movieSearch}
-            handleChange={this.updateInputValue}
-          />
+          <Search movieSearch={this.movieSearch} />
           <MoviesResult
             movies={this.state.movies}
             moviesResult={this.getMovies}

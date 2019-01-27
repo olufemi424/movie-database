@@ -2,8 +2,8 @@ import React from "react";
 import "./css/App.css";
 import MovieDB from "./components/MovieDB";
 import MovieDetail from "./components/MovieDetail";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/layouts/Header";
+import Footer from "./components/layouts/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App = () => (
