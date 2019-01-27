@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Overdrive from "react-overdrive";
+import StarRatings from "react-star-ratings";
 
 const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
 const BACKDROP_PATH = "http://image.tmdb.org/t/p/w1280";
@@ -36,11 +37,14 @@ class MovieDetail extends Component {
             <img src={`${POSTER_PATH}${movie.poster_path}`} alt="Poster" />
           </Overdrive>
           <div className="info">
-            <h2>{movie.title}</h2>
-            <h3>
-              Rating <span className="rating">{movie.vote_average}</span>
-            </h3>
-            <h3>{movie.release_date}</h3>
+            <h2 className="mb-3">{movie.title}</h2>
+            <StarRatings
+              rating={movie.vote_average}
+              starRatedColor="blue"
+              numberOfStars={10}
+              name="rating"
+            />
+            <h3 className="mt-3">{movie.release_date}</h3>
             <p>{movie.overview}</p>
           </div>
         </MovieInfo>
@@ -82,5 +86,9 @@ const MovieInfo = styled.div`
   img {
     position: relative;
     top: -6rem;
+  }
+
+  .rating {
+    width: ;
   }
 `;

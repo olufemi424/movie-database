@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Search from "./Search";
 import MoviesResult from "./MoviesResult";
-import Carousel from "./Carousel";
+// import Carousel from "./Carousel";
 
 const baseURL = "https://api.themoviedb.org/3/";
 const API_KEY = "56cbdfc579474a601e5ee545721a625f";
