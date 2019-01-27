@@ -40,11 +40,13 @@ class MovieDetail extends Component {
             <h2 className="mb-3">{movie.title}</h2>
             <StarRatings
               rating={movie.vote_average}
-              starRatedColor="blue"
+              starRatedColor="#FF982C"
               numberOfStars={10}
+              starDimension="25px"
+              starSpacing="3px"
               name="rating"
             />
-            <h3 className="mt-3">{movie.release_date}</h3>
+            <h3 className="mt-4">{movie.release_date}</h3>
             <p>{movie.overview}</p>
           </div>
         </MovieInfo>
