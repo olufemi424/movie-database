@@ -1,52 +1,64 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { movieDetails } from "../store/actions/movieActions";
 import styled from "styled-components";
 import Overdrive from "react-overdrive";
 import StarRatings from "react-star-ratings";
+import errorPosterPath from "../img/posterpath.png";
 
 const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
 const BACKDROP_PATH = "http://image.tmdb.org/t/p/w1280";
 
 class MovieDetail extends Component {
-  state = {
-    movie: {}
-    // activeovie: {}
-  };
-
-  componentWillMount = async () => {
+  componentDidMount = () => {
     const id = this.props.match.params.id;
-    // fetch data
-    try {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US`
-      );
-      const movie = await res.json();
-      this.setState({
-        movie: movie
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    //call action
+    this.props.movieDetails(id);
+
+    // const nwmmv = this.props.movie.movies.results.filter(mv => {
+    //   return mv.id == 450465;
+    // });
+    // this.setState({
+    //   movie: nwmmv[0]
+    // });
   };
 
   render() {
-    const { movie } = this.state;
+    const { movie } = this.props.movie;
     return (
-      <MovieWrapper backdrop={`${BACKDROP_PATH}${movie.backdrop_path}`}>
+      <MovieWrapper
+        backdrop={`${
+          movie.backdrop_path
+            ? BACKDROP_PATH + movie.poster_path
+            : errorPosterPath
+        }`}
+      >
         <MovieInfo>
           <Overdrive id={`${movie.id}`}>
-            <img src={`${POSTER_PATH}${movie.poster_path}`} alt="Poster" />
+            <img
+              src={
+                movie.poster_path
+                  ? POSTER_PATH + movie.poster_path
+                  : errorPosterPath
+              }
+              alt="Poster"
+            />
           </Overdrive>
           <div className="info">
-            <h2 className="mb-3">{movie.title}</h2>
+            <h2 className="mb-3">
+              {movie.title ? movie.title : movie.name || "Not Available"}
+            </h2>
             <StarRatings
-              rating={movie.vote_average}
+              rating={movie.vote_average ? movie.vote_average : 5}
               starRatedColor="#FF982C"
               numberOfStars={10}
               starDimension="25px"
               starSpacing="3px"
               name="rating"
             />
-            <h3 className="mt-4">{movie.release_date}</h3>
+            <h3 className="mt-4">
+              {movie.release_date ? movie.release_date : "Not Available"}
+            </h3>
             <p>{movie.overview}</p>
           </div>
         </MovieInfo>
@@ -55,7 +67,20 @@ class MovieDetail extends Component {
   }
 }
 
-export default MovieDetail;
+const mapStateToProps = state => ({
+  movie: state.movies
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    movieDetails: id => dispatch(movieDetails(id))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieDetail);
 
 const MovieWrapper = styled.div`
   position: relative;

@@ -15,10 +15,11 @@ const Movie = ({ movie }) => {
             src={`${POSTER_PATH}${movie.poster_path}`}
             alt="back drop path"
           />
-          <h5 className="card-title p-3 text-light">{`${movie.title.substring(
-            0,
-            10
-          )}`}</h5>
+          <h5 className="card-title p-3 text-light">
+            {movie.title
+              ? movie.title.substring(0, 10)
+              : movie.name.substring(0, 10)}
+          </h5>
         </div>
       </Overdrive>
     </Link>
@@ -30,7 +31,7 @@ export default Movie;
 // //check for proptypes
 Movie.propTypes = {
   movie: PropTypes.shape({
-    title: PropTypes.string.isRequired
+    // title: PropTypes.string.isRequired
   }).isRequired,
   desc: PropTypes.string
 };

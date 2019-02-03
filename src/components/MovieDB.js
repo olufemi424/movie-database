@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Search from "./Search";
-import MoviesResult from "./MoviesResult";
+import SearchResult from "./MovieList";
+import { connect } from "react-redux";
+import { getMovies } from "../store/actions/movieActions";
 // import Carousel from "./Carousel";
 
-const baseURL = "https://api.themoviedb.org/3/";
-const API_KEY = "56cbdfc579474a601e5ee545721a625f";
-
-class MoviesList extends Component {
+class MovieDb extends Component {
   state = {
     movies: [],
     page: 1,
@@ -16,49 +15,11 @@ class MoviesList extends Component {
 
   componentDidMount = () => {
     this._isMounted = true;
-    this.getMovies(this.state);
+    this.props.getMovies();
   };
 
   componentWillUnmount = () => {
     this._isMounted = false;
-  };
-
-  //get movies
-  getMovies = async data => {
-    try {
-      const res = await fetch(
-        `${baseURL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=${
-          data.page
-        }`
-      );
-      const movies = await res.json();
-      if (this._isMounted) {
-        this.setState({
-          keyword: "",
-          movies: movies.results
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //get movie with search keyword
-  movieSearch = keyword => {
-    let url = "".concat(
-      baseURL,
-      "search/movie?api_key=",
-      `${API_KEY}&language=en-US`,
-      "&query=",
-      keyword
-    );
-    fetch(url)
-      .then(result => result.json())
-      .then(data => {
-        this.setState({
-          movies: data.results
-        });
-      });
   };
 
   //next page
@@ -80,15 +41,13 @@ class MoviesList extends Component {
   };
 
   render() {
+    const { movies } = this.props.movies;
     return (
       <React.Fragment>
         {/* <Carousel movies={this.state.movies} /> */}
         <div className="container">
           <Search movieSearch={this.movieSearch} />
-          <MoviesResult
-            movies={this.state.movies}
-            moviesResult={this.getMovies}
-          />
+          <SearchResult movies={movies.results} />
           <PageNav>
             {this.state.page !== 1 && (
               <button onClick={this.prev} className="prev-btn ml-5">
@@ -121,4 +80,17 @@ export const PageNav = styled.div`
   }
 `;
 
-export default MoviesList;
+const mapStateToProps = state => ({
+  movies: state.movies
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getMovies: () => dispatch(getMovies())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieDb);

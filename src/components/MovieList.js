@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import Movie from "./Movie";
 
-class SearchResults extends Component {
+class MovieList extends Component {
   render() {
     let movieResults;
     if (this.props.movies) {
       movieResults = this.props.movies.map(movie => {
+        console.log(movie);
         return (
-          <div key={movie.id} className="col-sm-3">
+          <div key={movie.id} className="col-lg-2 col-md-3 col-sm-6">
             <Movie movie={movie} />
           </div>
         );
@@ -19,4 +20,4 @@ class SearchResults extends Component {
   }
 }
 
-export default SearchResults;
+export default MovieList;

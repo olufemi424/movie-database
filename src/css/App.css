@@ -36,3 +36,9 @@ a {
 #carousel img {
   height: 400px;
 }
+
+.card {
+  max-width: 300px;
+  padding-bottom: 100%;
+  margin: 0 auto;
+}

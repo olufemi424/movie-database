@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/App.css";
-import MovieDB from "./components/MovieDB";
+import MovieDb from "./components/MovieDb";
 import MovieDetail from "./components/MovieDetail";
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
@@ -11,7 +11,7 @@ const App = () => (
     <div className="App">
       <Header />
       <Switch>
-        <Route exact path="/" component={MovieDB} />
+        <Route exact path="/" component={MovieDb} />
         <Route path="/:id" component={MovieDetail} />
       </Switch>
       <Footer />

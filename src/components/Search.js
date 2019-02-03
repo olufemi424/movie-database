@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { movieSearch } from "../store/actions/movieActions";
 
 class Search extends Component {
   state = {
@@ -12,7 +14,7 @@ class Search extends Component {
     });
   };
 
-  movieSearch = e => {
+  searchMovie = e => {
     e.preventDefault();
     this.props.movieSearch(this.state.keyword);
   };
@@ -21,7 +23,7 @@ class Search extends Component {
     return (
       <SearchStyle>
         <section>
-          <form onSubmit={this.movieSearch}>
+          <form onSubmit={this.searchMovie}>
             <input
               type="text"
               className="input"
@@ -37,7 +39,16 @@ class Search extends Component {
   }
 }
 
-export default Search;
+const mapDispatchToProps = dispatch => {
+  return {
+    movieSearch: keyword => dispatch(movieSearch(keyword))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Search);
 
 export const SearchStyle = styled.div`
   input {
