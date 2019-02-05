@@ -11,15 +11,15 @@ const movieReducer = (state = initState, action) => {
         ...state,
         movies: action.payload
       };
-    case "GET_MOVIES_SEARCH":
-      return {
-        ...state,
-        movies: action.payload
-      };
     case "GET_MOVIE_DETAILS":
       return {
         ...state,
         movie: action.payload
+      };
+    case "GET_MOVIES_SEARCH":
+      return {
+        ...state,
+        movies: action.payload
       };
     case "ERROR_FETCHING_MOVIES":
       return {

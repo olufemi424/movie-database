@@ -4,9 +4,9 @@ import Movie from "./Movie";
 class MovieList extends Component {
   render() {
     let movieResults;
-    if (this.props.movies) {
-      movieResults = this.props.movies.map(movie => {
-        console.log(movie);
+    const { movies } = this.props;
+    if (movies) {
+      movieResults = movies.map(movie => {
         return (
           <div key={movie.id} className="col-lg-2 col-md-3 col-sm-6">
             <Movie movie={movie} />

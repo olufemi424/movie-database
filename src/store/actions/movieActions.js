@@ -32,12 +32,12 @@ export const movieSearch = keyword => {
     //async call
     axios
       .get(
-        `${baseURL}search/collection?api_key=${API_KEY}&language=en-US&query=${keyword}&page=1`
+        `${baseURL}search/movie?api_key=${API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`
       )
       .then(({ data }) => {
         dispatch(setMovieSearch(data));
       })
-      .then(err => {
+      .catch(err => {
         dispatch({ type: "ERROR_FETCHING_MOVIES", err });
       });
   };
@@ -50,7 +50,7 @@ const setMovieSearch = data => {
   };
 };
 
-export const movieDetails = id => {
+export const getMovieDetails = id => {
   return dispatch => {
     //async call
     axios
@@ -60,7 +60,7 @@ export const movieDetails = id => {
       .then(({ data }) => {
         dispatch(setMoiveDetails(data));
       })
-      .then(err => {
+      .catch(err => {
         dispatch({ type: "ERROR_FETCHING_MOVIES", err });
       });
   };
@@ -72,3 +72,10 @@ const setMoiveDetails = data => {
     payload: data
   };
 };
+
+// //profile loading
+// export const setProfileLoading = () => {
+//   return {
+//     type: "PROFILE_LOADING"
+//   };
+// };

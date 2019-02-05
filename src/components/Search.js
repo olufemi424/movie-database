@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { connect } from "react-redux";
 import { movieSearch } from "../store/actions/movieActions";
 
@@ -21,20 +20,27 @@ class Search extends Component {
 
   render() {
     return (
-      <SearchStyle>
+      <React.Fragment>
         <section>
-          <form onSubmit={this.searchMovie}>
-            <input
-              type="text"
-              className="input"
-              id="keyword"
-              placeholder="Enter Movie Name.."
-              onChange={this.handleChange}
-            />
-            <button>Search</button>
+          <form className="form" onSubmit={this.searchMovie}>
+            <div className="form__group">
+              <input
+                type="text"
+                className="form__input"
+                id="keyword"
+                placeholder="Movie name"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className="form__group">
+              <button className="form__btn">
+                <i className="fas fa-arrow-right" />
+              </button>
+            </div>
           </form>
         </section>
-      </SearchStyle>
+      </React.Fragment>
     );
   }
 }
@@ -49,37 +55,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(Search);
-
-export const SearchStyle = styled.div`
-  input {
-    font-size: 19px;
-    padding: 12px;
-    margin-top: 15px;
-    outline: none;
-    width: 70%;
-    border: 0;
-    border-radius: 5px;
-  }
-  button {
-    text-transform: uppercase;
-    font-size: 19px;
-    padding: 12px;
-    margin-left: 10px;
-    background-color: #353a3f;
-    color: #f4f4f4;
-    outline: none;
-    cursor: pointer;
-    border-radius: 5px;
-    letter-spacing: 2px;
-  }
-
-  button:hover {
-    background-color: #4c5054;
-  }
-
-  @media (max-width: 600px) {
-    input {
-      width: auto;
-    }
-  }
-`;

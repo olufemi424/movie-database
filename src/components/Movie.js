@@ -9,17 +9,15 @@ const Movie = ({ movie }) => {
   return (
     <Link to={`/${movie.id}`}>
       <Overdrive id={`${movie.id}`}>
-        <div className="card mb-4 p-2 bg-dark">
+        <div className="card mb-4 p-2">
           <img
             className="card-img-top img-fluid"
             src={`${POSTER_PATH}${movie.poster_path}`}
             alt="back drop path"
           />
-          <h5 className="card-title p-3 text-light">
-            {movie.title
-              ? movie.title.substring(0, 10)
-              : movie.name.substring(0, 10)}
-          </h5>
+          <h6 className="card-title p-3 text-light">
+            {movie.title.substring(0, 12)}
+          </h6>
         </div>
       </Overdrive>
     </Link>
