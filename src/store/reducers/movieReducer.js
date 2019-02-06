@@ -24,7 +24,7 @@ const movieReducer = (state = initState, action) => {
     case "ERROR_FETCHING_MOVIES":
       return {
         ...state,
-        errors: action.err
+        errors: action.payload
       };
     default:
       return state;

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Acme");
 
 .App-header {
-  background-color: #222;
+  background-color: rgb(0, 0, 0);
   max-height: 10vh;
   display: flex;
   justify-content: center;
@@ -34,11 +34,21 @@ a {
   height: 400px;
 }
 
+.card__outer {
+  background-color: #333;
+  min-width: 100%;
+  display: flex;
+  overflow: auto;
+}
+
 .card {
   max-width: 300px;
-  padding-bottom: 100%;
   margin: 0 auto;
   background: #3d3c3b3f;
+}
+
+.card::-webkit-scrollbar {
+  display: none;
 }
 
 .form {
@@ -83,5 +93,4 @@ a {
   border-bottom: 3px solid transparent;
   background-color: #ff982c;
   color: #333;
-  /* color: rgb(0, 0, 0); */
 }

@@ -9,7 +9,7 @@ const Movie = ({ movie }) => {
   return (
     <Link to={`/${movie.id}`}>
       <Overdrive id={`${movie.id}`}>
-        <div className="card mb-4 p-2">
+        <div className="card">
           <img
             className="card-img-top img-fluid"
             src={`${POSTER_PATH}${movie.poster_path}`}

@@ -16,7 +16,12 @@ class MovieList extends Component {
     } else {
       return <div className="text-light py-5">No Movie Found</div>;
     }
-    return <div className="row mt-4">{movieResults}</div>;
+    return (
+      <div>
+        <h2>TRENDING</h2>
+        <div className="card__outer">{movieResults}</div>
+      </div>
+    );
   }
 }
 

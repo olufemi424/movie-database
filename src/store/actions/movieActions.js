@@ -3,12 +3,12 @@ import axios from "axios";
 const baseURL = "https://api.themoviedb.org/3/";
 const API_KEY = "56cbdfc579474a601e5ee545721a625f";
 
-export const getMovies = () => {
+export const getMovies = (page = 1) => {
   return dispatch => {
     //async call
     axios
       .get(
-        `${baseURL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`
+        `${baseURL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}`
       )
       .then(({ data }) => {
         dispatch(setGetMovies(data));
