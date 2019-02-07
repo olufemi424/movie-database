@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import Search from "./Search";
-import SearchResult from "./MovieList";
+import MovieResult from "./MovieList";
 // import { NextButton, PrevButton } from "./movieActionsButton/NextButton";
 import { connect } from "react-redux";
-import { getMovies } from "../store/actions/movieActions";
+import {
+  getMovies,
+  getTrendingMovies,
+  getPopularMovies
+} from "../store/actions/movieActions";
 // import Carousel from "./Carousel";
 
 class MovieDb extends Component {
@@ -11,6 +15,8 @@ class MovieDb extends Component {
 
   componentDidMount = () => {
     this.props.getMovies();
+    this.props.getTrendingMovies();
+    this.props.getPopularMovies();
   };
 
   // handleNextClick = () => {
@@ -28,14 +34,22 @@ class MovieDb extends Component {
   // };
 
   render() {
-    const { movies } = this.props.movies;
+    const { movies, trendingMovies, popularMovies } = this.props.movies;
     return (
       <React.Fragment>
         {/* <Carousel movies={movies} /> */}
         <div className="container">
           <Search movieSearch={this.movieSearch} />
         </div>
-        <SearchResult movies={movies.results} />
+        <div className="category">
+          <MovieResult category="Now Playing" movies={movies.results} />
+          <MovieResult
+            category="Now Trending"
+            movies={trendingMovies.results}
+          />
+          <MovieResult category="Popular" movies={popularMovies.results} />
+        </div>
+
         {/* {this.state.page > 1 && <PrevButton onClick={this.handlePrevClick} />}
           <NextButton onClick={this.handleNextClick} /> */}
       </React.Fragment>
@@ -44,13 +58,14 @@ class MovieDb extends Component {
 }
 
 const mapStateToProps = state => ({
-  movies: state.movies,
-  page: state.page
+  movies: state.movies
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    getMovies: page => dispatch(getMovies(page))
+    getMovies: page => dispatch(getMovies(page)),
+    getTrendingMovies: () => dispatch(getTrendingMovies()),
+    getPopularMovies: page => dispatch(getPopularMovies(page))
   };
 };
 

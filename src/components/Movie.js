@@ -11,13 +11,11 @@ const Movie = ({ movie }) => {
       <Overdrive id={`${movie.id}`}>
         <div className="card">
           <img
-            className="card-img-top img-fluid"
+            className="card__image"
             src={`${POSTER_PATH}${movie.poster_path}`}
             alt="back drop path"
           />
-          <h6 className="card-title p-3 text-light">
-            {movie.title.substring(0, 12)}
-          </h6>
+          <h6 className="card__title">{movie.title.substring(0, 12)}</h6>
         </div>
       </Overdrive>
     </Link>

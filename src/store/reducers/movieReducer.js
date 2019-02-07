@@ -1,6 +1,8 @@
 const initState = {
   movies: [],
   movie: {},
+  trendingMovies: {},
+  popularMovies: {},
   errors: null
 };
 
@@ -20,6 +22,16 @@ const movieReducer = (state = initState, action) => {
       return {
         ...state,
         movies: action.payload
+      };
+    case "GET_TRENDING_MOVIES":
+      return {
+        ...state,
+        trendingMovies: action.payload
+      };
+    case "GET_POPULAR_MOVIES":
+      return {
+        ...state,
+        popularMovies: action.payload
       };
     case "ERROR_FETCHING_MOVIES":
       return {

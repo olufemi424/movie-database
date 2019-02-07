@@ -4,7 +4,7 @@ import Movie from "./Movie";
 class MovieList extends Component {
   render() {
     let movieResults;
-    const { movies } = this.props;
+    const { movies, category } = this.props;
     if (movies) {
       movieResults = movies.map(movie => {
         return (
@@ -17,10 +17,14 @@ class MovieList extends Component {
       return <div className="text-light py-5">No Movie Found</div>;
     }
     return (
-      <div>
-        <h2>TRENDING</h2>
-        <div className="card__outer">{movieResults}</div>
-      </div>
+      <React.Fragment>
+        <div className="category__title">
+          <h2>{category}</h2>
+        </div>
+        <div className="category__card">
+          <div className="card__outer">{movieResults}</div>
+        </div>
+      </React.Fragment>
     );
   }
 }
