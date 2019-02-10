@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { movieSearch } from "../store/actions/movieActions";
+import { withRouter } from "react-router-dom";
+import { movieSearch } from "../../store/actions/movieActions";
 
 class Search extends Component {
   state = {
@@ -16,6 +17,7 @@ class Search extends Component {
   searchMovie = e => {
     e.preventDefault();
     this.props.movieSearch(this.state.keyword);
+    this.props.history.push("/search");
   };
 
   render() {
@@ -28,14 +30,14 @@ class Search extends Component {
                 type="text"
                 className="form__input"
                 id="keyword"
-                placeholder="Movie name"
+                placeholder="Search"
                 onChange={this.handleChange}
                 required
               />
             </div>
             <div className="form__group">
               <button className="form__btn">
-                <i className="fas fa-arrow-right" />
+                <i className="fas fa-search" />
               </button>
             </div>
           </form>
@@ -54,4 +56,23 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(Search);
+)(withRouter(Search));
+
+// import { NextButton, PrevButton } from "./movieActionsButton/NextButton";
+
+// handleNextClick = () => {
+//   let cur = this.props.movies.movies.page;
+//   let nextpage = cur + 1;
+//   this.setState({ page: nextpage });
+//   this.props.getMovies(nextpage);
+// };
+
+// handlePrevClick = () => {
+//   let cur = this.props.movies.movies.page;
+//   let nextpage = cur - 1;
+//   this.setState({ page: nextpage });
+//   this.props.getMovies(nextpage);
+// };
+
+// {this.state.page > 1 && <PrevButton onClick={this.handlePrevClick} />}
+// <NextButton onClick={this.handleNextClick} />

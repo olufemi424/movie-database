@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Spinner from "./layouts/Spinner";
+import Spinner from "../layouts/Spinner";
 
 export class Carousel extends Component {
   render() {

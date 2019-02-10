@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMovieDetails } from "../store/actions/movieActions";
+import { fetchMovie } from "../../store/actions/movieActions";
 import styled from "styled-components";
 import Overdrive from "react-overdrive";
 import StarRatings from "react-star-ratings";
-import errorPosterPath from "../img/posterpath.png";
-import Spinner from "./layouts/Spinner";
+import errorPosterPath from "../../img/posterpath.png";
+import Spinner from "../layouts/Spinner";
 
 const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
 const BACKDROP_PATH = "http://image.tmdb.org/t/p/w1280";
 
 class MovieDetails extends Component {
   componentDidMount() {
-    const { id } = this.props.movieId;
+    const { url } = this.props.movieIdPath;
     //call action
-    this.props.getMovieDetails(id);
+    this.props.fetchMovie("GET_MOVIE_DETAILS", url);
   }
 
   render() {
@@ -44,7 +44,7 @@ class MovieDetails extends Component {
             </Overdrive>
             <div className="info">
               <h2 className="mb-3">
-                {movieDetails.title ? movieDetails.title : "Not Available"}
+                {movieDetails.title ? movieDetails.title : movieDetails.name}
               </h2>
               <StarRatings
                 rating={
@@ -59,7 +59,7 @@ class MovieDetails extends Component {
               <h3 className="mt-4">
                 {movieDetails.release_date
                   ? movieDetails.release_date
-                  : "Not Available"}
+                  : movieDetails.first_air_date}
               </h3>
               <p>{movieDetails.overview}</p>
             </div>
@@ -73,13 +73,13 @@ class MovieDetails extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     movieDetails: state.movies.movie,
-    movieId: ownProps.match.params
+    movieIdPath: ownProps.match
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getMovieDetails: id => dispatch(getMovieDetails(id))
+    fetchMovie: (type, id) => dispatch(fetchMovie(type, id))
   };
 };
 
@@ -101,7 +101,7 @@ const MovieInfo = styled.div`
   background-image: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 1) 50%,
     rgba(0, 0, 0, 1) 100%
   );
   color: #f4f4f4;

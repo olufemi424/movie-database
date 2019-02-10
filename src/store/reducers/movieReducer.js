@@ -3,6 +3,9 @@ const initState = {
   movie: {},
   trendingMovies: {},
   popularMovies: {},
+  popularSeries: {},
+  topRatedSeries: {},
+  movieSearchResult: {},
   errors: null
 };
 
@@ -21,7 +24,7 @@ const movieReducer = (state = initState, action) => {
     case "GET_MOVIES_SEARCH":
       return {
         ...state,
-        movies: action.payload
+        movieSearchResult: action.payload
       };
     case "GET_TRENDING_MOVIES":
       return {
@@ -32,6 +35,16 @@ const movieReducer = (state = initState, action) => {
       return {
         ...state,
         popularMovies: action.payload
+      };
+    case "GET_POPULAR_SERIES":
+      return {
+        ...state,
+        popularSeries: action.payload
+      };
+    case "GET_TOP_RATED_SERIES":
+      return {
+        ...state,
+        topRatedSeries: action.payload
       };
     case "ERROR_FETCHING_MOVIES":
       return {

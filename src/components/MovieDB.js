@@ -1,57 +1,52 @@
 import React, { Component } from "react";
-import Search from "./Search";
-import MovieResult from "./MovieList";
-// import { NextButton, PrevButton } from "./movieActionsButton/NextButton";
 import { connect } from "react-redux";
-import {
-  getMovies,
-  getTrendingMovies,
-  getPopularMovies
-} from "../store/actions/movieActions";
-// import Carousel from "./Carousel";
+import { fetchMovie } from "../store/actions/movieActions";
+// import Carousel from "./movieComponents/Carousel";
+
+import NowPlaying from "./movieCategories/NowPlaying";
+import NowTrending from "./movieCategories/NowTrending";
+import Popular from "./movieCategories/Popular";
+import TvShows from "./movieCategories/TvShows";
+import TopRatedShows from "./movieCategories/TopRatedShows";
 
 class MovieDb extends Component {
   state = { page: this.props.movies.movies.page };
 
-  componentDidMount = () => {
-    this.props.getMovies();
-    this.props.getTrendingMovies();
-    this.props.getPopularMovies();
-  };
-
-  // handleNextClick = () => {
-  //   let cur = this.props.movies.movies.page;
-  //   let nextpage = cur + 1;
-  //   this.setState({ page: nextpage });
-  //   this.props.getMovies(nextpage);
-  // };
-
-  // handlePrevClick = () => {
-  //   let cur = this.props.movies.movies.page;
-  //   let nextpage = cur - 1;
-  //   this.setState({ page: nextpage });
-  //   this.props.getMovies(nextpage);
-  // };
-
   render() {
-    const { movies, trendingMovies, popularMovies } = this.props.movies;
+    const {
+      movies,
+      trendingMovies,
+      popularMovies,
+      popularSeries,
+      topRatedSeries
+    } = this.props.movies;
     return (
       <React.Fragment>
         {/* <Carousel movies={movies} /> */}
-        <div className="container">
-          <Search movieSearch={this.movieSearch} />
-        </div>
+        <div className="container" />
         <div className="category">
-          <MovieResult category="Now Playing" movies={movies.results} />
-          <MovieResult
-            category="Now Trending"
+          <NowPlaying
+            getMovies={this.props.fetchMovie}
+            movies={movies.results}
+          />
+          <NowTrending
+            getTrendingMovies={this.props.fetchMovie}
             movies={trendingMovies.results}
           />
-          <MovieResult category="Popular" movies={popularMovies.results} />
-        </div>
+          <Popular
+            getPopularMovies={this.props.fetchMovie}
+            movies={popularMovies.results}
+          />
 
-        {/* {this.state.page > 1 && <PrevButton onClick={this.handlePrevClick} />}
-          <NextButton onClick={this.handleNextClick} /> */}
+          <TvShows
+            getMovieSeries={this.props.fetchMovie}
+            movies={popularSeries.results}
+          />
+          <TopRatedShows
+            getTopRatedSeries={this.props.fetchMovie}
+            movies={topRatedSeries.results}
+          />
+        </div>
       </React.Fragment>
     );
   }
@@ -63,9 +58,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    getMovies: page => dispatch(getMovies(page)),
-    getTrendingMovies: () => dispatch(getTrendingMovies()),
-    getPopularMovies: page => dispatch(getPopularMovies(page))
+    fetchMovie: type => dispatch(fetchMovie(type))
   };
 };
 

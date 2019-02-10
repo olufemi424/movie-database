@@ -1,80 +1,7 @@
 import axios from "axios";
 
-const baseURL = "https://api.themoviedb.org/3/";
+const baseURL = "https://api.themoviedb.org/3";
 const API_KEY = "56cbdfc579474a601e5ee545721a625f";
-
-//GET NOW PLAYING MOVIES ACTION
-export const getMovies = (page = 1) => {
-  return dispatch => {
-    //async call
-    axios
-      .get(
-        `${baseURL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}`
-      )
-      .then(({ data }) => {
-        dispatch(setGetMovies(data));
-      })
-      .then(err => {
-        dispatch({ type: "ERROR_FETCHING_MOVIES", payload: err });
-      });
-  };
-};
-
-// DISPATCH ACTION OF NOW PLAYING MOVIES
-const setGetMovies = data => {
-  return {
-    type: "GET_MOVIES",
-    payload: data
-  };
-};
-
-//TRENDING MOVIES
-export const getTrendingMovies = () => {
-  return dispatch => {
-    //async call
-    axios
-      .get(`${baseURL}trending/movie/week?api_key=${API_KEY}`)
-      .then(({ data }) => {
-        dispatch(setGetTrendingMovies(data));
-      })
-      .then(err => {
-        dispatch({ type: "ERROR_FETCHING_TRENDING_MOVIES", payload: err });
-      });
-  };
-};
-
-// DISPATH ACTION TO UPDATE STORE OF TRENDING
-const setGetTrendingMovies = data => {
-  return {
-    type: "GET_TRENDING_MOVIES",
-    payload: data
-  };
-};
-
-//POPULAR MOVIES ACTION
-export const getPopularMovies = (page = 1) => {
-  return dispatch => {
-    //async call
-    axios
-      .get(
-        `${baseURL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`
-      )
-      .then(({ data }) => {
-        dispatch(setGetPopularMovies(data));
-      })
-      .then(err => {
-        dispatch({ type: "ERROR_FETCHING_POPULAR_MOVIES", payload: err });
-      });
-  };
-};
-
-// DISPATH POPULAR ACTION TO UPDATE STORE OF TRENDING
-const setGetPopularMovies = data => {
-  return {
-    type: "GET_POPULAR_MOVIES",
-    payload: data
-  };
-};
 
 //SEARCH BY KEYWORD ACTION
 export const movieSearch = keyword => {
@@ -82,7 +9,7 @@ export const movieSearch = keyword => {
     //async call
     axios
       .get(
-        `${baseURL}search/movie?api_key=${API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`
+        `${baseURL}/search/multi?api_key=${API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`
       )
       .then(({ data }) => {
         dispatch(setMovieSearch(data));
@@ -102,15 +29,15 @@ const setMovieSearch = data => {
 };
 
 //GET MOVIE DETAILS OF INDIVIDUAL MOVIE BY ID ACTION
-export const getMovieDetails = id => {
+export const fetchMovie = (type, id, page = 1) => {
+  const term = getType(type, id);
+
   return dispatch => {
     //async call
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US`
-      )
+      .get(`${baseURL}${term}?api_key=${API_KEY}&language=en-US&page=${page}`)
       .then(({ data }) => {
-        dispatch(setMoiveDetails(data));
+        dispatch(setFetchedMovie(data, type));
       })
       .catch(err => {
         dispatch({ type: "ERROR_FETCHING_MOVIES", err });
@@ -119,9 +46,33 @@ export const getMovieDetails = id => {
 };
 
 //DISPATCH ACTION TYPE TO UPDATE MOVIE DETAILS OF INDIVIDUAL MOVIE
-const setMoiveDetails = data => {
+const setFetchedMovie = (data, type) => {
   return {
-    type: "GET_MOVIE_DETAILS",
+    type: type,
     payload: data
   };
 };
+
+const getType = (type, id) => {
+  switch (type) {
+    case "GET_MOVIES":
+      return "/movie/now_playing";
+    case "GET_MOVIE_DETAILS":
+      return `${id}`;
+    case "GET_TRENDING_MOVIES":
+      return "/trending/movie/week";
+    case "GET_POPULAR_MOVIES":
+      return "/movie/popular";
+    case "GET_TV_DETAILS":
+      return `${id}`;
+    case "GET_POPULAR_SERIES":
+      return "/tv/on_the_air";
+    case "GET_TOP_RATED_SERIES":
+      return "/tv/top_rated";
+
+    default:
+      return null;
+  }
+};
+
+fetchMovie("GET_MOVIES");
