@@ -9,8 +9,7 @@ export default function Spinner() {
         alt="Loding..."
         style={{
           width: "80px",
-          top: "400px",
-          margin: "200px auto"
+          margin: "50% auto"
         }}
       />
     </div>

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <FooterStyle>
       <p>
-        Copyright &copy; Movie DataBase 2018 by{" "}
+        Copyright &copy; Movie DataBase {new Date().getFullYear()} by{" "}
         <span>
           <a className="light" href="http//olufemiaf.com">
             olufemiaf {`🤓`}

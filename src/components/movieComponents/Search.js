@@ -47,11 +47,9 @@ class Search extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    movieSearch: keyword => dispatch(movieSearch(keyword))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  movieSearch: keyword => dispatch(movieSearch(keyword))
+});
 
 export default connect(
   null,

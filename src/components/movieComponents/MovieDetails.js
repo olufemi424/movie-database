@@ -77,10 +77,14 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchMovie: (type, id) => dispatch(fetchMovie(type, id))
-  };
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     fetchMovie: (type, id) => dispatch(fetchMovie(type, id))
+//   };
+// };
+
+const mapDispatchToProps = {
+  fetchMovie
 };
 
 export default connect(

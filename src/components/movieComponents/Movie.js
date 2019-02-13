@@ -25,9 +25,6 @@ const Movie = props => {
             src={`${POSTER_PATH}${movie.poster_path}`}
             alt="back drop path"
           />
-          <h6 className="card__title">
-            {movie.title ? movie.title : movie.name}
-          </h6>
         </div>
       </Overdrive>
     </Link>

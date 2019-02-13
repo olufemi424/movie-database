@@ -28,7 +28,7 @@ const setMovieSearch = data => {
   };
 };
 
-//GET MOVIE DETAILS OF INDIVIDUAL MOVIE BY ID ACTION
+//GET MOVIE DETAILS OF INDIVIDUAL MOVIE BY ID, TYPE, PAGE => ACTIONS
 export const fetchMovie = (type, id, page = 1) => {
   const term = getType(type, id);
 
@@ -53,6 +53,7 @@ const setFetchedMovie = (data, type) => {
   };
 };
 
+//TYOES OF ACTIONS
 const getType = (type, id) => {
   switch (type) {
     case "GET_MOVIES":
@@ -74,5 +75,3 @@ const getType = (type, id) => {
       return null;
   }
 };
-
-fetchMovie("GET_MOVIES");
