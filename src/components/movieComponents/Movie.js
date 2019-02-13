@@ -1,36 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Overdrive from "react-overdrive";
 
 const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
 
-const Movie = ({ movie }) => {
+const Movie = props => {
+  const { movie, path } = props;
+  let route;
+  if (movie.media_type) {
+    route = movie.media_type;
+  } else if (path === "tv") {
+    route = "tv";
+  } else {
+    route = "movie";
+  }
+
   return (
-    <Link to={`/${movie.id}`}>
+    <Link to={`${route}/${movie.id}`}>
       <Overdrive id={`${movie.id}`}>
-        <div className="card mb-4 p-2 bg-dark">
+        <div className="card">
           <img
-            className="card-img-top img-fluid"
+            className="card__image"
             src={`${POSTER_PATH}${movie.poster_path}`}
             alt="back drop path"
           />
-          <h5 className="card-title p-3 text-light">{`${movie.title.substring(
-            0,
-            10
-          )}`}</h5>
         </div>
       </Overdrive>
     </Link>
   );
 };
 
-export default Movie;
+export default withRouter(Movie);
 
 // //check for proptypes
 Movie.propTypes = {
   movie: PropTypes.shape({
-    title: PropTypes.string.isRequired
+    title: PropTypes.string,
+    name: PropTypes.string
   }).isRequired,
   desc: PropTypes.string
 };

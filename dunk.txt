@@ -1,0 +1,147 @@
+//GET NOW PLAYING MOVIES ACTION
+export const getMovies = (page = 1) => {
+  return dispatch => {
+    //async call
+    axios
+      .get(
+        `${baseURL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}`
+      )
+      .then(({ data }) => {
+        dispatch(setGetMovies(data));
+      })
+      .then(err => {
+        dispatch({ type: "ERROR_FETCHING_MOVIES", payload: err });
+      });
+  };
+};
+
+// DISPATCH ACTION OF NOW PLAYING MOVIES
+const setGetMovies = data => {
+  return {
+    type: "GET_MOVIES",
+    payload: data
+  };
+};
+
+//TRENDING MOVIES
+export const getTrendingMovies = () => {
+  return dispatch => {
+    //async call
+    axios
+      .get(`${baseURL}trending/movie/week?api_key=${API_KEY}`)
+      .then(({ data }) => {
+        dispatch(setGetTrendingMovies(data));
+      })
+      .then(err => {
+        dispatch({ type: "ERROR_FETCHING_TRENDING_MOVIES", payload: err });
+      });
+  };
+};
+
+// DISPATH ACTION TO UPDATE STORE OF TRENDING
+const setGetTrendingMovies = data => {
+  return {
+    type: "GET_TRENDING_MOVIES",
+    payload: data
+  };
+};
+
+//POPULAR MOVIES ACTION
+export const getPopularMovies = (page = 1) => {
+  return dispatch => {
+    //async call
+    axios
+      .get(
+        `${baseURL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`
+      )
+      .then(({ data }) => {
+        dispatch(setGetPopularMovies(data));
+      })
+      .then(err => {
+        dispatch({ type: "ERROR_FETCHING_POPULAR_MOVIES", payload: err });
+      });
+  };
+};
+
+// DISPATH POPULAR ACTION TO UPDATE STORE OF TRENDING
+const setGetPopularMovies = data => {
+  return {
+    type: "GET_POPULAR_MOVIES",
+    payload: data
+  };
+};
+
+//POPULAR MOVIES ACTION
+export const getMovieSeries = (page = 1) => {
+  return dispatch => {
+    //async call
+    axios
+      .get(
+        ` ${baseURL}tv/on_the_air?api_key=${API_KEY}&language=en-US&page=${page}`
+      )
+      .then(({ data }) => {
+        dispatch(setGetMovieSeries(data));
+      })
+      .then(err => {
+        dispatch({ type: "ERROR_FETCHING_POPULAR_MOVIES", payload: err });
+      });
+  };
+};
+
+// DISPATH POPULAR ACTION TO UPDATE STORE OF TRENDING
+const setGetMovieSeries = data => {
+  return {
+    type: "GET_POPULAR_SERIES",
+    payload: data
+  };
+};
+
+//POPULAR MOVIES ACTION
+export const getTopRatedSeries = (page = 1) => {
+  return dispatch => {
+    //async call
+    axios
+      .get(
+        ` ${baseURL}tv/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`
+      )
+      .then(({ data }) => {
+        dispatch(setGetTopRatedSeries(data));
+      })
+      .then(err => {
+        dispatch({ type: "ERROR_FETCHING_POPULAR_MOVIES", payload: err });
+      });
+  };
+};
+
+// DISPATH POPULAR ACTION TO UPDATE STORE OF TRENDING
+const setGetTopRatedSeries = data => {
+  return {
+    type: "GET_TOP_RATED_SERIES",
+    payload: data
+  };
+};
+
+//GET MOVIE DETAILS OF INDIVIDUAL MOVIE BY ID ACTION
+export const getMovieDetails = id => {
+  return dispatch => {
+    //async call
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=56cbdfc579474a601e5ee545721a625f&language=en-US`
+      )
+      .then(({ data }) => {
+        dispatch(setMoiveDetails(data));
+      })
+      .catch(err => {
+        dispatch({ type: "ERROR_FETCHING_MOVIES", err });
+      });
+  };
+};
+
+//DISPATCH ACTION TYPE TO UPDATE MOVIE DETAILS OF INDIVIDUAL MOVIE
+const setMoiveDetails = data => {
+  return {
+    type: "GET_MOVIE_DETAILS",
+    payload: data
+  };
+};

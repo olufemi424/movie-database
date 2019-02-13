@@ -1,124 +1,68 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import Search from "./Search";
-import MoviesResult from "./MoviesResult";
-// import Carousel from "./Carousel";
+import { connect } from "react-redux";
+import { fetchMovie } from "../store/actions/movieActions";
+// import Carousel from "./movieComponents/Carousel";
 
-const baseURL = "https://api.themoviedb.org/3/";
-const API_KEY = "56cbdfc579474a601e5ee545721a625f";
+import NowPlaying from "./movieCategories/NowPlaying";
+import NowTrending from "./movieCategories/NowTrending";
+import Popular from "./movieCategories/Popular";
+import TvShows from "./movieCategories/TvShows";
+import TopRatedShows from "./movieCategories/TopRatedShows";
 
-class MoviesList extends Component {
-  state = {
-    movies: [],
-    page: 1,
-    keyword: ""
-  };
-
-  componentDidMount = () => {
-    this._isMounted = true;
-    this.getMovies(this.state);
-  };
-
-  componentWillUnmount = () => {
-    this._isMounted = false;
-  };
-
-  //get movies
-  getMovies = async data => {
-    try {
-      const res = await fetch(
-        `${baseURL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=${
-          data.page
-        }`
-      );
-      const movies = await res.json();
-      if (this._isMounted) {
-        this.setState({
-          keyword: "",
-          movies: movies.results
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //get movie with search keyword
-  movieSearch = keyword => {
-    let url = "".concat(
-      baseURL,
-      "search/movie?api_key=",
-      `${API_KEY}&language=en-US`,
-      "&query=",
-      keyword
-    );
-    fetch(url)
-      .then(result => result.json())
-      .then(data => {
-        this.setState({
-          movies: data.results
-        });
-      });
-  };
-
-  //next page
-  next = () => {
-    const { page } = this.state;
-    this.setState({
-      page: page + 1
-    });
-    this.getMovies(this.state);
-  };
-
-  // prev page
-  prev = () => {
-    const { page } = this.state;
-    this.setState({
-      page: page - 1
-    });
-    this.getMovies(this.state);
-  };
+class MovieDb extends Component {
+  state = { page: this.props.movies.movies.page };
 
   render() {
+    const {
+      movies,
+      trendingMovies,
+      popularMovies,
+      popularSeries,
+      topRatedSeries
+    } = this.props.movies;
     return (
       <React.Fragment>
-        {/* <Carousel movies={this.state.movies} /> */}
-        <div className="container">
-          <Search movieSearch={this.movieSearch} />
-          <MoviesResult
-            movies={this.state.movies}
-            moviesResult={this.getMovies}
+        {/* <Carousel movies={movies} /> */}
+        <div className="container" />
+        <div className="category">
+          <NowPlaying
+            getMovies={this.props.fetchMovie}
+            movies={movies.results}
           />
-          <PageNav>
-            {this.state.page !== 1 && (
-              <button onClick={this.prev} className="prev-btn ml-5">
-                Prev
-              </button>
-            )}
-            <button onClick={this.next} className="next-btn mr-5">
-              Next
-            </button>
-          </PageNav>
+          <NowTrending
+            getTrendingMovies={this.props.fetchMovie}
+            movies={trendingMovies.results}
+          />
+          <Popular
+            getPopularMovies={this.props.fetchMovie}
+            movies={popularMovies.results}
+          />
+
+          <TvShows
+            getMovieSeries={this.props.fetchMovie}
+            movies={popularSeries.results}
+          />
+          <TopRatedShows
+            getTopRatedSeries={this.props.fetchMovie}
+            movies={topRatedSeries.results}
+          />
         </div>
       </React.Fragment>
     );
   }
 }
 
-export const PageNav = styled.div`
-  button {
-    text-transform: uppercase;
-    font-size: 19px;
-    padding: 12px;
-    margin-right: 10px;
-    background-color: #353a3f;
-    color: #f4f4f4;
-    outline: none;
-    cursor: pointer;
-    border-radius: 5px;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-  }
-`;
+const mapStateToProps = state => ({
+  movies: state.movies
+});
 
-export default MoviesList;
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchMovie: type => dispatch(fetchMovie(type))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieDb);
