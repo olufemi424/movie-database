@@ -25,14 +25,8 @@ class MovieDb extends Component {
         {/* <Carousel movies={movies} /> */}
         <div className="container" />
         <div className="category">
-          <NowPlaying
-            getMovies={this.props.fetchMovie}
-            movies={movies.results}
-          />
-          <NowTrending
-            getTrendingMovies={this.props.fetchMovie}
-            movies={trendingMovies.results}
-          />
+          <NowPlaying />
+          <NowTrending />
           <Popular
             getPopularMovies={this.props.fetchMovie}
             movies={popularMovies.results}
