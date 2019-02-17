@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 // import Carousel from "./movieComponents/Carousel";
 
 import NowPlaying from "./movieCategories/NowPlaying";
@@ -8,6 +9,7 @@ import TvShows from "./movieCategories/TvShows";
 import TopRatedShows from "./movieCategories/TopRatedShows";
 
 class MovieDb extends Component {
+
   render() {
     return (
       <React.Fragment>
@@ -24,4 +26,6 @@ class MovieDb extends Component {
   }
 }
 
+
 export default MovieDb;
+
