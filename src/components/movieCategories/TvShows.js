@@ -1,16 +1,30 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchMovie } from "../../store/actions/movieActions";
 
-import MovieResult from "../movieComponents/MovieList";
+import MovieList from "../movieComponents/MovieList";
 
 class TvShows extends Component {
   componentDidMount() {
-    this.props.getMovieSeries("GET_POPULAR_SERIES");
+    this.props.fetchMovie("GET_POPULAR_SERIES");
   }
   render() {
     return (
-      <MovieResult path="tv" category="Shows" movies={this.props.movies} />
+      <MovieList
+        path="tv"
+        link="shows"
+        category="Shows"
+        movies={this.props.movies.results}
+      />
     );
   }
 }
 
-export default TvShows;
+const mapStateToProps = state => ({
+  movies: state.movies.popularSeries
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchMovie }
+)(TvShows);

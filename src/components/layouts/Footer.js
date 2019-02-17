@@ -1,9 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 
 const Footer = () => {
   return (
-    <FooterStyle>
+    <footer>
       <p>
         Copyright &copy; Movie DataBase {new Date().getFullYear()} by{" "}
         <span>
@@ -12,26 +11,8 @@ const Footer = () => {
           </a>
         </span>
       </p>
-    </FooterStyle>
+    </footer>
   );
 };
 
 export default Footer;
-
-const FooterStyle = styled.div`
-  text-align: center;
-  background: #000;
-  height: 60px;
-  padding: 10px;
-  color: #777;
-  font-weight: 200;
-  p {
-    font-size: 14px;
-  }
-  .light {
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-  }
-`;

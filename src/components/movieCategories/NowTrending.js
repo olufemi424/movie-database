@@ -1,20 +1,30 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchMovie } from "../../store/actions/movieActions";
 
-import MovieResult from "../movieComponents/MovieList";
+import MovieList from "../movieComponents/MovieList";
 
 class NowTrending extends Component {
   componentDidMount() {
-    this.props.getTrendingMovies("GET_TRENDING_MOVIES");
+    this.props.fetchMovie("GET_TRENDING_MOVIES");
   }
   render() {
     return (
-      <MovieResult
+      <MovieList
         path="movie"
         category="Now Trending"
-        movies={this.props.movies}
+        link="nowtrending"
+        movies={this.props.movies.results}
       />
     );
   }
 }
 
-export default NowTrending;
+const mapStateToProps = state => ({
+  movies: state.movies.trendingMovies
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchMovie }
+)(NowTrending);

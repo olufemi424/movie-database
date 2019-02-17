@@ -6,6 +6,7 @@ const initState = {
   popularSeries: {},
   topRatedSeries: {},
   movieSearchResult: {},
+  searchKeyword: "batman",
   errors: null
 };
 
