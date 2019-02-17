@@ -9,13 +9,9 @@ class TvShows extends Component {
     this.props.fetchMovie("GET_POPULAR_SERIES");
   }
   render() {
+    const { results } = this.props.movies;
     return (
-      <MovieList
-        path="tv"
-        link="shows"
-        category="Shows"
-        movies={this.props.movies.results}
-      />
+      <MovieList path="tv" link="shows" category="Shows" movies={results} />
     );
   }
 }

@@ -20,12 +20,29 @@ body {
 =            NAVIGATION           =
 =============================================*/
 
+.nav__toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  background-color: #fff;
+  -webkit-appearance: push-button;
+  cursor: pointer;
+}
+
+/* .nav__height {
+  position: absolute;
+  top: -200px;
+} */
+
 nav ul {
   margin: 0;
   list-style: none;
   padding: 0;
-  background: #444;
+  background-color: #2424243e;
   text-align: center;
+  /* height: 60px; */
+  transition: all 400ms;
 }
 
 nav ul li a {
@@ -71,7 +88,7 @@ form {
   padding: 6px 0;
   background-color: #6f6f6f3c;
   border: none;
-  border-bottom: 3px solid transparent;
+  border-bottom: 2px solid transparent;
   width: 100%;
   transition: all 500ms;
 }
@@ -79,10 +96,10 @@ form {
 .form__input:focus {
   outline: none;
   box-shadow: 1 1rem 2rem rgba(0, 0, 0, 0.1);
-  border-bottom: 3px solid #55c57a;
+  border-bottom: 2px solid #55c57a;
 }
 .form__input:focus:focus:invalid {
-  border-bottom: 3px solid #ff982c;
+  border-bottom: 2px solid #ff982c;
 }
 
 .form__input::-webkit-input-placeholder {
@@ -96,16 +113,20 @@ form {
 .form__btn {
   display: block;
   width: 100%;
-  font-size: 20px;
-  font-family: inherit;
-  padding: 5px 5px;
+  float: right;
+  font-size: 18px;
+  padding: 7px 3px;
+  background-color: transparent;
+  color: #fff;
   background-color: #ff982c;
-  color: #333;
-  margin-right: 20px;
 }
 
 /* styling for larger devices */
 @media (min-width: 800px) {
+  .nav__toggle {
+    display: none;
+  }
+
   nav {
     display: flex;
     justify-content: space-between;
@@ -178,11 +199,19 @@ form {
   }
   .form__btn {
     width: 100%;
-    margin-left: 5px;
+    margin-left: 30px;
+    color: #ff982c;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 1px solid #ff982c;
   }
 }
 
 /*=====  End of NAVIGATION  ======*/
+
+/*=============================================
+=               CAROUSEL           =
+=============================================*/
 
 a {
   text-decoration: none !important;
@@ -198,6 +227,11 @@ a {
 #carousel img {
   height: 400px;
 }
+/*===== END OF CAROUSEL ======*/
+
+/*=============================================
+=            CATEGORIES            =
+=============================================*/
 
 .categories {
   margin: 0;
@@ -210,10 +244,15 @@ a {
   margin: 20px 0 20px 40px;
   font-size: 25px;
 }
+/*=====  End of CATEGORIES  ======*/
+
+/*=============================================
+=            CARD            =
+=============================================*/
 
 .card__outer {
   padding: 20px;
-  background-color: rgba(36, 36, 36, 0.242);
+  background-color: #2424243e;
   min-width: 100%;
   display: flex;
   overflow: auto;
@@ -224,7 +263,7 @@ a {
 }
 
 .card {
-  margin: 0 auto;
+  margin: 0 10px;
   background: #3d3c3b14;
 }
 
@@ -237,6 +276,55 @@ a {
   font-size: 14px;
   padding: 10px 0;
 }
+/*=====  End of CARD  ======*/
+
+/*=============================================
+=             MOVIES DETAILS           =
+=============================================*/
+
+.movie__details {
+  position: relative;
+  padding-top: 56vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.movie__details--info {
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  color: #f4f4f4;
+  text-align: left;
+  padding: 2rem 5%;
+  display: flex;
+  grid-template-columns: repeat(2, 2fr);
+}
+
+.movie__details--box {
+  margin-left: 30px;
+}
+
+.movie__details-poster {
+  position: relative;
+  top: -6rem;
+  border-radius: 3px;
+}
+
+.movie__details--runtime {
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+/*=====  End of MOVIES DETAILS  ======*/
 
 /*=============================================
 =            FOOTER            =

@@ -10,7 +10,7 @@ class MovieList extends Component {
     if (movies) {
       movieResults = movies.map(movie => {
         return (
-          <div key={movie.id} className="col-md-3 col-lg-2">
+          <div key={movie.id}>
             <Movie movie={movie} path={path} />
           </div>
         );
@@ -25,7 +25,7 @@ class MovieList extends Component {
             <h2>{category}</h2>
           </Link>
         </div>
-        <div className="category__card text-center">
+        <div className="category__card">
           <div className="card__outer">{movieResults}</div>
         </div>
       </React.Fragment>
