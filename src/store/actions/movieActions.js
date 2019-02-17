@@ -30,12 +30,14 @@ const setMovieSearch = data => {
 
 //GET MOVIE DETAILS OF INDIVIDUAL MOVIE BY ID, TYPE, PAGE => ACTIONS
 export const fetchMovie = (type, id, page = 1) => {
-  const term = getType(type, id);
+  const searchUrl = getType(type, id);
 
   return dispatch => {
     //async call
     axios
-      .get(`${baseURL}${term}?api_key=${API_KEY}&language=en-US&page=${page}`)
+      .get(
+        `${baseURL}${searchUrl}?api_key=${API_KEY}&language=en-US&page=${page}`
+      )
       .then(({ data }) => {
         dispatch(setFetchedMovie(data, type));
       })
@@ -57,13 +59,13 @@ const setFetchedMovie = (data, type) => {
 const getType = (type, id) => {
   switch (type) {
     case "GET_MOVIES":
-      return "/movie/now_playing";
+      return "/discover/movie";
     case "GET_MOVIE_DETAILS":
       return `${id}`;
     case "GET_TRENDING_MOVIES":
       return "/trending/movie/week";
     case "GET_POPULAR_MOVIES":
-      return "/movie/popular";
+      return "/movie/upcoming";
     case "GET_TV_DETAILS":
       return `${id}`;
     case "GET_POPULAR_SERIES":

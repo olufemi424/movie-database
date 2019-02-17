@@ -13,6 +13,7 @@ class NowPlaying extends Component {
       <MovieList
         path="movie"
         category="Now Playing"
+        link="nowplaying"
         movies={this.props.movies.results}
       />
     );

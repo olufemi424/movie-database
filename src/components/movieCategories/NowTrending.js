@@ -13,6 +13,7 @@ class NowTrending extends Component {
       <MovieList
         path="movie"
         category="Now Trending"
+        link="nowtrending"
         movies={this.props.movies.results}
       />
     );
