@@ -57,7 +57,7 @@ class MovieDetails extends Component {
               />
             </Overdrive>
             <div className="info movie__details--box">
-              <h2 className="mb-3 movie__details--info-title">
+              <h2 className="movie__details--info-title">
                 {movieDetails.title ? movieDetails.title : movieDetails.name}{" "}
                 <span className="movie__details--runtime">
                   <i className="far fa-clock" /> {movieDetails.runtime} mins

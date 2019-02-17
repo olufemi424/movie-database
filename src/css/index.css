@@ -311,6 +311,14 @@ a {
   margin-left: 30px;
 }
 
+.movie__details--info-title {
+  margin-bottom: 20px;
+}
+
+.movie__details--info-date {
+  margin-bottom: 20px;
+}
+
 .movie__details-poster {
   position: relative;
   top: -6rem;
@@ -332,7 +340,7 @@ a {
 
 footer {
   text-align: center;
-  background: #000;
+  background: #000000f3;
   height: 60px;
   color: #777;
   font-weight: 200;
@@ -348,3 +356,16 @@ footer .light {
   display: inline-block;
 }
 /*=====  End of FOOTER  ======*/
+
+/* spinner */
+.loading__spinner {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.loading__spinner-img {
+  width: 40px;
+  margin: 100px 50%;
+  transform: translate(50%, 50%);
+}
