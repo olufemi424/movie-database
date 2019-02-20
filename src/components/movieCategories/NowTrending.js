@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMovie } from "../../store/actions/movieActions";
+import { getTrendingMovies } from "../../store/actions/movieActions";
 
 import MovieList from "../movieComponents/MovieList";
 
 class NowTrending extends Component {
   componentDidMount() {
-    this.props.fetchMovie("GET_TRENDING_MOVIES");
+    this.props.getTrendingMovies();
   }
   render() {
     return (
@@ -26,5 +26,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchMovie }
+  { getTrendingMovies }
 )(NowTrending);

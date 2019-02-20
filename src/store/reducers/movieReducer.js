@@ -37,7 +37,7 @@ const movieReducer = (state = initState, action) => {
         ...state,
         popularMovies: action.payload
       };
-    case "GET_POPULAR_SERIES":
+    case "GET_POPULAR_SHOWS":
       return {
         ...state,
         popularSeries: action.payload

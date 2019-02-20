@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMovie } from "../../store/actions/movieActions";
+import { getTopRatedTvShows } from "../../store/actions/movieActions";
 
 import MovieList from "../movieComponents/MovieList";
 
 class TopRatedShows extends Component {
   componentDidMount() {
-    this.props.fetchMovie("GET_TOP_RATED_SERIES");
+    this.props.getTopRatedTvShows();
   }
   render() {
     return (
@@ -26,5 +26,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchMovie }
+  { getTopRatedTvShows }
 )(TopRatedShows);

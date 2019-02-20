@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMovie } from "../../store/actions/movieActions";
+import { getPopularTvShows } from "../../store/actions/movieActions";
 
 import MovieList from "../movieComponents/MovieList";
 
 class TvShows extends Component {
   componentDidMount() {
-    this.props.fetchMovie("GET_POPULAR_SERIES");
+    this.props.getPopularTvShows();
   }
   render() {
     const { results } = this.props.movies;
@@ -22,5 +22,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchMovie }
+  { getPopularTvShows }
 )(TvShows);

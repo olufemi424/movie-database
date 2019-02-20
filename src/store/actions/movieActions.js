@@ -47,6 +47,14 @@ export const fetchMovie = (type, id, page = 1) => {
   };
 };
 
+//NAMED ACTIONS
+export const fetchMovies = fetchMovie.bind(this, "GET_MOVIES");
+export const getMovieDetails = fetchMovie.bind(this, "GET_MOVIE_DETAILS");
+export const getTrendingMovies = fetchMovie.bind(this, "GET_TRENDING_MOVIES");
+export const getPopularMovies = fetchMovie.bind(this, "GET_POPULAR_MOVIES");
+export const getPopularTvShows = fetchMovie.bind(this, "GET_POPULAR_SHOWS");
+export const getTopRatedTvShows = fetchMovie.bind(this, "GET_TOP_RATED_SERIES");
+
 //DISPATCH ACTION TYPE TO UPDATE MOVIE DETAILS OF INDIVIDUAL MOVIE
 const setFetchedMovie = (data, type) => {
   return {
@@ -66,9 +74,9 @@ const getType = (type, id) => {
       return "/trending/movie/week";
     case "GET_POPULAR_MOVIES":
       return "/movie/upcoming";
-    case "GET_TV_DETAILS":
-      return `${id}`;
-    case "GET_POPULAR_SERIES":
+    // case "GET_TV_DETAILS":
+    //   return `${id}`;
+    case "GET_POPULAR_SHOWS":
       return "/tv/on_the_air";
     case "GET_TOP_RATED_SERIES":
       return "/tv/top_rated";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMovie } from "../../store/actions/movieActions";
+import { getMovieDetails } from "../../store/actions/movieActions";
 import Overdrive from "react-overdrive";
 import StarRatings from "react-star-ratings";
 import errorPosterPath from "../../img/posterpath.png";
@@ -13,7 +13,7 @@ class MovieDetails extends Component {
   componentDidMount() {
     const { url } = this.props.movieIdPath;
     //call action
-    this.props.fetchMovie("GET_MOVIE_DETAILS", url);
+    this.props.getMovieDetails(url);
   }
 
   render() {
@@ -99,7 +99,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = {
-  fetchMovie
+  getMovieDetails
 };
 
 export default connect(

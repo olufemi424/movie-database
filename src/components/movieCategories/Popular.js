@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMovie } from "../../store/actions/movieActions";
+import { getPopularMovies } from "../../store/actions/movieActions";
 
 import MovieList from "../movieComponents/MovieList";
 
 class Popular extends Component {
   componentDidMount() {
-    this.props.fetchMovie("GET_POPULAR_MOVIES");
+    this.props.getPopularMovies();
   }
   render() {
     return (
@@ -26,5 +26,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchMovie }
+  { getPopularMovies }
 )(Popular);
