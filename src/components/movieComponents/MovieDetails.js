@@ -16,8 +16,23 @@ class MovieDetails extends Component {
     this.props.getMovieDetails(url);
   }
 
+  //GET RUN TIME
+  getRuntime = () => {
+    const { runtime } = this.props.movieDetails;
+    if (runtime) {
+      const minutes = runtime % 60;
+      const hour = (runtime - minutes) / 60;
+      return (
+        <span>
+          {hour}hr {minutes}mins
+        </span>
+      );
+    }
+  };
+
   render() {
     const { movieDetails } = this.props;
+
     const { genres } = movieDetails;
     let movieGen;
     if (genres) {
@@ -60,7 +75,12 @@ class MovieDetails extends Component {
               <h2 className="movie__details--info-title">
                 {movieDetails.title ? movieDetails.title : movieDetails.name}{" "}
                 <span className="movie__details--runtime">
-                  <i className="far fa-clock" /> {movieDetails.runtime} mins
+                  <i className="far fa-clock" />{" "}
+                  {movieDetails.runtime
+                    ? this.getRuntime()
+                    : `${movieDetails.number_of_seasons} Seasons ${
+                        movieDetails.number_of_episodes
+                      } Episodes`}
                 </span>
               </h2>
               <StarRatings
