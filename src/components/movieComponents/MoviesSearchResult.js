@@ -10,20 +10,23 @@ class MovieResult extends Component {
     if (results) {
       movieResults = results.map(movie => {
         return (
-          <div key={movie.id} className="col-md-3">
+          <div key={movie.id} className="search__item">
             <Movie movie={movie} path={movie.media_type} />
           </div>
         );
       });
     } else {
-      return <div className="text-light py-5">No Movie Found</div>;
-    }
-    return (
-      <div className="row">
-        <div className="category__title ">
-          <h2 className="text-center">Search Results</h2>
+      movieResults = (
+        <div className="search__notfound">
+          No Movie Found <span>{"👻"}</span>
         </div>
-        <div className="row">{movieResults}</div>
+      );
+    }
+
+    return (
+      <div className="search">
+        <h2 className="search__heading">Search Results</h2>
+        <div className="search__box">{movieResults}</div>
       </div>
     );
   }

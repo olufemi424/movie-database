@@ -110,6 +110,9 @@ form {
   margin-left: 5px;
 }
 
+.form__btn:active,
+.form__btn:link,
+.form__btn:focus,
 .form__btn {
   display: block;
   width: 100%;
@@ -119,6 +122,7 @@ form {
   background-color: transparent;
   color: #fff;
   background-color: #ff982c;
+  cursor: pointer;
 }
 
 /* styling for larger devices */
@@ -196,14 +200,19 @@ form {
     font-size: 21px;
     border-bottom: 3px solid transparent;
     width: 100%;
+    border-radius: 3px 0 0 3px;
   }
+  .form__btn:active,
+  .form__btn:link,
+  .form__btn:focus,
   .form__btn {
     width: 100%;
     margin-left: 30px;
     color: #ff982c;
     background-color: transparent;
-    border-radius: 3px;
-    border: 1px solid #ff982c;
+    border-radius: 0 0 30px 0;
+    border: 1.5px solid #ff982c;
+    outline: none;
   }
 }
 
@@ -333,6 +342,37 @@ a {
 }
 
 /*=====  End of MOVIES DETAILS  ======*/
+
+/*=============================================
+=            Search            =
+=============================================*/
+
+.search__box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 20px;
+}
+
+.search__item {
+  margin-top: 20px;
+}
+
+.search__heading {
+  text-align: center;
+  padding: 30px;
+  color: #acabab;
+}
+.search__notfound {
+  text-align: center;
+  width: 100vw;
+  margin: 200px auto;
+  color: #fff;
+}
+
+/*=====  End of  Search ======*/
 
 /*=============================================
 =            FOOTER            =
