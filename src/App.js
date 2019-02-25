@@ -17,7 +17,7 @@ const App = () => (
       <Nav />
       <Switch>
         <Route exact path="/" component={MovieDb} />
-        <Route path="/search" component={MoviesSearchResult} />
+        <Route path="/search/:keyword" component={MoviesSearchResult} />
         <Route path="/movie/:id" component={MovieDetails} />
         <Route path="/tv/:id" component={MovieDetails} />
         <Route path="/nowtrending" component={NowTrending} />

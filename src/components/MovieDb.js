@@ -1,31 +1,92 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import MovieList from "./movieComponents/MovieList";
+
+import {
+  getPopularTvShows,
+  fetchMovies,
+  getTrendingMovies,
+  getPopularMovies,
+  getTopRatedTvShows
+} from "../store/actions/movieActions";
 
 // import Carousel from "./movieComponents/Carousel";
 
-import NowPlaying from "./movieCategories/NowPlaying";
-import NowTrending from "./movieCategories/NowTrending";
-import Popular from "./movieCategories/Popular";
-import TvShows from "./movieCategories/TvShows";
-import TopRatedShows from "./movieCategories/TopRatedShows";
-
 class MovieDb extends Component {
+  componentDidMount() {
+    this.props.getPopularTvShows();
+    this.props.fetchMovies();
+    this.props.getTrendingMovies();
+    this.props.getPopularMovies();
+    this.props.getTopRatedTvShows();
+  }
 
   render() {
+    const {
+      movies,
+      popularMovies,
+      trendingMovies,
+      popularSeries,
+      topRatedSeries
+    } = this.props;
+
     return (
       <React.Fragment>
         {/* <Carousel movies={movies} /> */}
         <div className="categories">
-          <NowPlaying />
-          <NowTrending />
-          <Popular />
-          <TvShows />
-          <TopRatedShows />
+          <MovieList
+            path="movie"
+            category="Now Playing"
+            link="nowplaying"
+            movies={movies.results}
+          />
+          <MovieList
+            path="movie"
+            category="Now Trending"
+            link="nowtrending"
+            movies={trendingMovies.results}
+          />
+          <MovieList
+            path="movie"
+            category="Popular"
+            link="popular"
+            movies={popularMovies.results}
+          />
+          <MovieList
+            path="tv"
+            link="shows"
+            category="Shows"
+            movies={popularSeries.results}
+          />
+          <MovieList
+            path="tv"
+            category="Top Rated Shows"
+            link="topshows"
+            movies={topRatedSeries.results}
+          />
         </div>
       </React.Fragment>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  movies: state.movies.movies,
+  popularMovies: state.movies.popularMovies,
+  trendingMovies: state.movies.trendingMovies,
+  popularSeries: state.movies.popularSeries,
+  topRatedSeries: state.movies.topRatedSeries
+});
 
-export default MovieDb;
+const mapDispatchToProps = {
+  getPopularTvShows,
+  fetchMovies,
+  getTrendingMovies,
+  getPopularMovies,
+  getTopRatedTvShows
+};
 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieDb);

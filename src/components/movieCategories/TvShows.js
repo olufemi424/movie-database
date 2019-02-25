@@ -2,16 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPopularTvShows } from "../../store/actions/movieActions";
 
-import MovieList from "../movieComponents/MovieList";
+import MovieGrid from "../movieComponents/MovieGrid";
 
 class TvShows extends Component {
   componentDidMount() {
     this.props.getPopularTvShows();
   }
   render() {
-    const { results } = this.props.movies;
+    const { movies } = this.props;
     return (
-      <MovieList path="tv" link="shows" category="Shows" movies={results} />
+      <div>
+        <MovieGrid movies={movies} component="Shows" />
+      </div>
     );
   }
 }

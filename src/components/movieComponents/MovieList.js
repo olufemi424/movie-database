@@ -20,10 +20,11 @@ class MovieList extends Component {
     }
     return (
       <React.Fragment>
-        <div className="category__title">
-          <Link to={link ? link : "/"}>
-            <h2>{category}</h2>
-          </Link>
+        <div>
+          <h2 className="category__title">
+            {" "}
+            <Link to={link ? link : "/"}>{category}</Link>
+          </h2>
         </div>
         <div className="category__card">
           <div className="card__outer">{movieResults}</div>

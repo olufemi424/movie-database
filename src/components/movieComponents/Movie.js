@@ -18,7 +18,7 @@ const Movie = props => {
   }
 
   return (
-    <Link to={`${route}/${movie.id}`}>
+    <Link to={`/${route}/${movie.id}`}>
       <Overdrive id={`${movie.id}`}>
         <div className="card">
           <img

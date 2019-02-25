@@ -95,14 +95,14 @@ class MovieDetails extends Component {
                 starSpacing="3px"
                 name="rating"
               />
-              <h3 className="mt-4 movie__details--info-date">
-                <span className="mr-3">
+              <h3 className="mt-4">
+                <span className="mr-3 movie__details--info-date">
                   {" "}
                   {movieDetails.release_date
                     ? movieDetails.release_date
                     : movieDetails.first_air_date}
                 </span>
-                <span>{movieGen}</span>
+                <span className="movie__details--genre">{movieGen}</span>
               </h3>
               <p>{movieDetails.overview}</p>
             </div>

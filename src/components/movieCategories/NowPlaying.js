@@ -2,20 +2,28 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchMovies } from "../../store/actions/movieActions";
 
-import MovieList from "../movieComponents/MovieList";
+import MovieGrid from "../movieComponents/MovieGrid";
+import Spinner from "../layouts/Spinner";
 
 class NowPlaying extends Component {
+  state = {
+    movie: ""
+  };
   componentDidMount() {
     this.props.fetchMovies();
   }
   render() {
+    const { movies } = this.props;
+    let result;
+    if (movies) {
+      result = movies;
+    } else {
+      result = <Spinner />;
+    }
     return (
-      <MovieList
-        path="movie"
-        category="Now Playing"
-        link="nowplaying"
-        movies={this.props.movies.results}
-      />
+      <div>
+        <MovieGrid movies={result} component="Now Playing" />
+      </div>
     );
   }
 }

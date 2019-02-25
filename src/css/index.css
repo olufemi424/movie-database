@@ -53,6 +53,10 @@ nav ul li a {
   line-height: 1;
 }
 
+nav ul li a:hover {
+  color: #ff982c;
+}
+
 nav ul li {
   border-bottom: 1px solid #ddd;
 }
@@ -136,6 +140,7 @@ form {
     justify-content: space-between;
     background-color: #222;
     align-items: center;
+    height: 60px;
   }
 
   nav .logo a {
@@ -161,7 +166,7 @@ form {
   }
 
   nav ul li a {
-    padding: 1rem 0.8rem;
+    padding: 1.4rem 0.8rem;
   }
 
   nav ul li a::before,
@@ -210,9 +215,14 @@ form {
     margin-left: 30px;
     color: #ff982c;
     background-color: transparent;
-    border-radius: 0 0 30px 0;
-    border: 1.5px solid #ff982c;
+    padding-top: 10px;
+    border: none;
     outline: none;
+    transition: all ease 0.4s;
+  }
+
+  .form__btn:hover {
+    color: #b5824c;
   }
 }
 
@@ -247,11 +257,14 @@ a {
   padding: 0;
 }
 
-.category__title h2 {
-  color: #acabab;
+.category__title {
   padding: 10px 0;
   margin: 20px 0 20px 40px;
   font-size: 25px;
+}
+
+.category__title a {
+  color: #acabab;
 }
 /*=====  End of CATEGORIES  ======*/
 
@@ -330,6 +343,10 @@ a {
   margin-bottom: 20px;
 }
 
+.movie__details--genre {
+  font-size: 16px;
+}
+
 .movie__details-poster {
   position: relative;
   top: -6rem;
@@ -347,10 +364,10 @@ a {
 /*=====  End of MOVIES DETAILS  ======*/
 
 /*=============================================
-=            Search            =
+=            Flex Layout            =
 =============================================*/
 
-.search__box {
+.flex__box {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -359,31 +376,44 @@ a {
   padding: 10px 20px;
 }
 
-.search__item {
+@media only screen and (max-width: 600px) {
+  .flex__box {
+    padding: 10px 0;
+    justify-content: none;
+  }
+
+  .flex__item {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.flex__item {
   margin-top: 20px;
   max-width: 190px;
   min-height: 270px;
 }
 
-.search__heading {
+.flex__heading {
   text-align: center;
   padding: 30px;
   color: #acabab;
 }
-.search__notfound {
+.flex__notfound {
   text-align: center;
   width: 100vw;
   margin: 200px auto;
   color: #fff;
 }
 
-.search__item-title {
+.flex__item-title {
   color: #fff;
   text-align: center;
   margin-top: 15px;
+  font-size: 14px;
 }
 
-/*=====  End of  Search ======*/
+/*=====  End of  Flex Layout  ======*/
 
 /*=============================================
 =            FOOTER            =
@@ -418,5 +448,5 @@ footer .light {
 .loading__spinner-img {
   width: 40px;
   margin: 100px 50%;
-  transform: translate(50%, 50%);
+  transform: translate(-50%, -50%);
 }

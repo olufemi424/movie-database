@@ -2,20 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPopularMovies } from "../../store/actions/movieActions";
 
-import MovieList from "../movieComponents/MovieList";
+import MovieGrid from "../movieComponents/MovieGrid";
 
 class Popular extends Component {
   componentDidMount() {
     this.props.getPopularMovies();
   }
   render() {
+    const { movies } = this.props;
     return (
-      <MovieList
-        path="movie"
-        category="Popular"
-        link="popular"
-        movies={this.props.movies.results}
-      />
+      <div>
+        <MovieGrid movies={movies} component="Popular" />
+      </div>
     );
   }
 }

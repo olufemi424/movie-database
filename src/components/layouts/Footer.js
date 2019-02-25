@@ -6,7 +6,11 @@ const Footer = () => {
       <p>
         Copyright &copy; Movie DataBase {new Date().getFullYear()} by{" "}
         <span>
-          <a className="light" href="http//olufemiaf.com">
+          <a
+            className="light"
+            href="http://olufemiaf.com"
+            rel="noopener noreferrer"
+          >
             olufemiaf {`🤓`}
           </a>
         </span>

@@ -17,7 +17,7 @@ class Search extends Component {
   searchMovie = e => {
     e.preventDefault();
     this.props.movieSearch(this.state.keyword);
-    this.props.history.push("/search");
+    this.props.history.push(`/search/${this.state.keyword}`);
   };
 
   render() {
@@ -47,9 +47,9 @@ class Search extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  movieSearch: keyword => dispatch(movieSearch(keyword))
-});
+const mapDispatchToProps = {
+  movieSearch
+};
 
 export default connect(
   null,

@@ -74,8 +74,6 @@ const getType = (type, id) => {
       return "/trending/movie/week";
     case "GET_POPULAR_MOVIES":
       return "/movie/upcoming";
-    // case "GET_TV_DETAILS":
-    //   return `${id}`;
     case "GET_POPULAR_SHOWS":
       return "/tv/on_the_air";
     case "GET_TOP_RATED_SERIES":

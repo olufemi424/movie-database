@@ -2,20 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getTopRatedTvShows } from "../../store/actions/movieActions";
 
-import MovieList from "../movieComponents/MovieList";
+import MovieGrid from "../movieComponents/MovieGrid";
 
 class TopRatedShows extends Component {
   componentDidMount() {
     this.props.getTopRatedTvShows();
   }
   render() {
+    const { movies } = this.props;
     return (
-      <MovieList
-        path="tv"
-        category="Top Rated Shows"
-        link="topshows"
-        movies={this.props.movies.results}
-      />
+      <div>
+        <MovieGrid movies={movies} component="Top Rated Shows" />
+      </div>
     );
   }
 }
