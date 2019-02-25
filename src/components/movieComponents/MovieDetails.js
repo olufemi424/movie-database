@@ -4,6 +4,8 @@ import { getMovieDetails } from "../../store/actions/movieActions";
 import Overdrive from "react-overdrive";
 import StarRatings from "react-star-ratings";
 import errorPosterPath from "../../img/posterpath.png";
+import defaultBackdrop from "../../img/backdrop.png";
+
 import Spinner from "../layouts/Spinner";
 
 const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
@@ -66,7 +68,7 @@ class MovieDetails extends Component {
                 src={
                   movieDetails.poster_path
                     ? POSTER_PATH + movieDetails.poster_path
-                    : errorPosterPath
+                    : defaultBackdrop
                 }
                 alt="Poster"
               />

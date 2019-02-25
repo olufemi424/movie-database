@@ -278,6 +278,8 @@ a {
 
 .card img {
   border-radius: 3px;
+  min-height: 250px;
+  max-height: 250px;
 }
 
 .card__title {
@@ -332,6 +334,7 @@ a {
   position: relative;
   top: -6rem;
   border-radius: 3px;
+  background: #000;
 }
 
 .movie__details--runtime {
@@ -358,6 +361,8 @@ a {
 
 .search__item {
   margin-top: 20px;
+  max-width: 190px;
+  min-height: 270px;
 }
 
 .search__heading {
@@ -370,6 +375,12 @@ a {
   width: 100vw;
   margin: 200px auto;
   color: #fff;
+}
+
+.search__item-title {
+  color: #fff;
+  text-align: center;
+  margin-top: 15px;
 }
 
 /*=====  End of  Search ======*/

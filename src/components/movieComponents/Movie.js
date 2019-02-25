@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import Overdrive from "react-overdrive";
+import defaultBackdrop from "../../img/backdrop.png";
 
 const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
 
@@ -22,7 +23,11 @@ const Movie = props => {
         <div className="card">
           <img
             className="card__image"
-            src={`${POSTER_PATH}${movie.poster_path}`}
+            src={
+              movie.poster_path
+                ? POSTER_PATH + movie.poster_path
+                : defaultBackdrop
+            }
             alt="back drop path"
           />
         </div>

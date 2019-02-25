@@ -6,12 +6,18 @@ import Movie from "./Movie";
 class MovieResult extends Component {
   render() {
     const { results } = this.props.movies;
+    console.log(this.props.movies);
     let movieResults;
     if (results) {
       movieResults = results.map(movie => {
         return (
           <div key={movie.id} className="search__item">
             <Movie movie={movie} path={movie.media_type} />
+            <h6 className="search__item-title">
+              {movie.title
+                ? movie.title.substring(0, 13)
+                : movie.name.substring(0, 13)}{" "}
+            </h6>
           </div>
         );
       });
