@@ -22,7 +22,7 @@ class NowPlaying extends Component {
     }
     return (
       <div>
-        <MovieGrid movies={result} component="Now Playing" />
+        <MovieGrid movies={result} component="Now Playing" path="movie" />
       </div>
     );
   }

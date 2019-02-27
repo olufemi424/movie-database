@@ -12,7 +12,7 @@ class TopRatedShows extends Component {
     const { movies } = this.props;
     return (
       <div>
-        <MovieGrid movies={movies} component="Top Rated Shows" />
+        <MovieGrid movies={movies} component="Top Rated Shows" path="tv" />
       </div>
     );
   }

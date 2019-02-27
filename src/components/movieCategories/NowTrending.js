@@ -12,7 +12,7 @@ class NowTrending extends Component {
     const { movies } = this.props;
     return (
       <div>
-        <MovieGrid movies={movies} component="Now Trending" />
+        <MovieGrid movies={movies} component="Now Trending" path="movie" />
       </div>
     );
   }

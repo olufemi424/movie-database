@@ -12,7 +12,7 @@ class TvShows extends Component {
     const { movies } = this.props;
     return (
       <div>
-        <MovieGrid movies={movies} component="Shows" />
+        <MovieGrid movies={movies} component="Shows" path="tv" />
       </div>
     );
   }

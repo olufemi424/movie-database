@@ -12,7 +12,7 @@ class Popular extends Component {
     const { movies } = this.props;
     return (
       <div>
-        <MovieGrid movies={movies} component="Popular" />
+        <MovieGrid movies={movies} component="Popular" path="movie" />
       </div>
     );
   }
