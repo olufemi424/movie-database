@@ -32,7 +32,11 @@ const mapStateToProps = state => ({
   movies: state.movies.movies
 });
 
+const mapDispatchToProps = {
+  fetchMovies
+};
+
 export default connect(
   mapStateToProps,
-  { fetchMovies }
+  mapDispatchToProps
 )(NowPlaying);
