@@ -15,6 +15,8 @@ class MovieDetails extends Component {
   componentDidMount() {
     const { url } = this.props.movieIdPath;
     //call action
+
+    console.log(url);
     this.props.getMovieDetails(url);
   }
 

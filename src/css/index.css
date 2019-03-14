@@ -420,21 +420,21 @@ a {
 =============================================*/
 
 footer {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #000000f3;
   height: 60px;
   color: #777;
   font-weight: 200;
 }
 footer p {
-  padding: 20px 0;
   font-size: 14px;
 }
+
 footer .light {
   color: white;
-  text-align: center;
   text-decoration: none;
-  display: inline-block;
 }
 /*=====  End of FOOTER  ======*/
 
