@@ -4,17 +4,37 @@ import Search from "../movieComponents/Search";
 
 class Header extends Component {
   state = {
-    isOpen: false,
-    navClass: "nav__height"
+    isOpen: true
   };
 
-  handleClick = e => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  };
+  // handleClick = e => {
+  //   this.setState(prevState => {
+  //     return { isOpen: !prevState.isOpen };
+  //   });
+  // };
 
   render() {
+    const mainUl = (
+      <React.Fragment>
+        <ul className={this.state.isOpen ? "" : this.state.navClass}>
+          <li id="heading">
+            <Link to="/nowplaying">Now Playing</Link>
+          </li>
+          <li>
+            <Link to="/popular">Popular</Link>
+          </li>
+          <li>
+            <Link to="/shows">Shows</Link>
+          </li>
+        </ul>
+        <ul className={this.state.isOpen ? "" : this.state.navClass}>
+          <li>
+            <Search />
+          </li>
+        </ul>
+      </React.Fragment>
+    );
+
     return (
       <header>
         <nav>
@@ -25,26 +45,13 @@ class Header extends Component {
             </Link>
           </div>
 
-          <ul className={this.state.isOpen ? "" : this.state.navClass}>
-            <li id="heading">
-              <Link to="/nowplaying">Now Playing</Link>
-            </li>
-            <li>
-              <Link to="/popular">Popular</Link>
-            </li>
-            <li>
-              <Link to="/shows">Shows</Link>
-            </li>
-          </ul>
-          <ul className={this.state.isOpen ? "" : this.state.navClass}>
-            <li>
-              <Search />
-            </li>
-          </ul>
+          <button className="toggle-button" onClick={this.handleClick}>
+            <div className="toggle-button__line" />
+            <div className="toggle-button__line" />
+            <div className="toggle-button__line" />
+          </button>
+          {this.state.isOpen && mainUl}
         </nav>
-        <div className="nav__toggle" onClick={this.handleClick}>
-          XXX
-        </div>
       </header>
     );
   }
