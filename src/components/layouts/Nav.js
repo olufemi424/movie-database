@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Search from "../movieComponents/Search";
 
 class Header extends Component {
@@ -7,51 +7,38 @@ class Header extends Component {
     isOpen: true
   };
 
-  // handleClick = e => {
-  //   this.setState(prevState => {
-  //     return { isOpen: !prevState.isOpen };
-  //   });
-  // };
-
   render() {
     const mainUl = (
       <React.Fragment>
-        <ul className={this.state.isOpen ? "" : this.state.navClass}>
-          <li id="heading">
-            <Link to="/nowplaying">Now Playing</Link>
+        <ul className="user-nav__list">
+          <li id="heading" className="user-nav__list--item">
+            <NavLink className="user-nav__list--link" to="/nowplaying">
+              Now Playing
+            </NavLink>
           </li>
-          <li>
-            <Link to="/popular">Popular</Link>
+          <li className="user-nav__list--item">
+            <NavLink className="user-nav__list--link" to="/popular">
+              Popular
+            </NavLink>
           </li>
-          <li>
-            <Link to="/shows">Shows</Link>
-          </li>
-        </ul>
-        <ul className={this.state.isOpen ? "" : this.state.navClass}>
-          <li>
-            <Search />
+          <li className="user-nav__list--item">
+            <NavLink className="user-nav__list--link" to="/shows">
+              Shows
+            </NavLink>
           </li>
         </ul>
       </React.Fragment>
     );
 
     return (
-      <header>
-        <nav>
-          <div className="logo">
-            <Link to="/" className="nav__brand">
-              {" "}
-              Movie Database
-            </Link>
-          </div>
+      <header class="header">
+        <div class="logo">
+          <Link to="/"> Movie Database</Link>
+        </div>
 
-          <button className="toggle-button" onClick={this.handleClick}>
-            <div className="toggle-button__line" />
-            <div className="toggle-button__line" />
-            <div className="toggle-button__line" />
-          </button>
-          {this.state.isOpen && mainUl}
-        </nav>
+        <Search />
+
+        <nav class="user-nav">{mainUl}</nav>
       </header>
     );
   }
