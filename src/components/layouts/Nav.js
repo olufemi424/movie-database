@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
+
+//components
 import Search from "../movieComponents/Search";
 
 class Header extends Component {
@@ -31,14 +33,14 @@ class Header extends Component {
     );
 
     return (
-      <header class="header">
-        <div class="logo">
+      <header className="header">
+        <div className="logo">
           <Link to="/"> Movie Database</Link>
         </div>
 
         <Search />
 
-        <nav class="user-nav">{mainUl}</nav>
+        <nav className="user-nav">{mainUl}</nav>
       </header>
     );
   }

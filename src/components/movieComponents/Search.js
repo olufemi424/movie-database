@@ -23,16 +23,16 @@ class Search extends Component {
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.searchMovie} class="search">
+        <form onSubmit={this.searchMovie} className="search">
           <input
             type="text"
-            class="search__input"
+            className="search__input"
             placeholder="Search For Movies"
             onChange={this.handleChange}
             required
           />
-          <button class="search__button">
-            <i class="fas fa-search search__icon" />
+          <button className="search__button">
+            <i className="fas fa-search search__icon" />
           </button>
         </form>
       </React.Fragment>

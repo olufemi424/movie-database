@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import Overdrive from "react-overdrive";
 import defaultBackdrop from "../../img/backdrop.png";
+import StarRatings from "react-star-ratings";
 
 const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
 
@@ -30,6 +31,21 @@ const Movie = props => {
             }
             alt="back drop path"
           />
+          <h6 className="flex__item-title">
+            {movie.title
+              ? movie.title.substring(0, 20)
+              : movie.name.substring(0, 20)}{" "}
+          </h6>
+          <div style={{ width: 100, margin: "0 auto" }}>
+            <StarRatings
+              rating={movie.vote_average ? movie.vote_average / 2 : 5}
+              starRatedColor="#FF982C"
+              numberOfStars={5}
+              starDimension="15px"
+              starSpacing="3px"
+              name="rating"
+            />
+          </div>
         </div>
       </Overdrive>
     </Link>
