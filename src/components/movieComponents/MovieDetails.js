@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMovieDetails } from "../../store/actions/movieActions";
-import Overdrive from "react-overdrive";
+import {
+  getMovieDetails,
+  getPopularMovies
+} from "../../store/actions/movieActions";
 import StarRatings from "react-star-ratings";
-import errorPosterPath from "../../img/posterpath.png";
 import defaultBackdrop from "../../img/backdrop.png";
+import MovieList from "../movieComponents/MovieList";
 
 import Spinner from "../layouts/Spinner";
 
-const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
+// const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
 const BACKDROP_PATH = "http://image.tmdb.org/t/p/w1280";
 
 class MovieDetails extends Component {
   componentDidMount() {
     const { url } = this.props.movieIdPath;
     //call action
-
-    console.log(url);
     this.props.getMovieDetails(url);
+    this.props.getPopularMovies();
   }
 
   //GET RUN TIME
@@ -35,79 +36,79 @@ class MovieDetails extends Component {
   };
 
   render() {
-    const { movieDetails } = this.props;
+    const { movieDetails, popularMovies } = this.props;
 
     const { genres } = movieDetails;
     let movieGen;
     if (genres) {
-      movieGen = Object.entries(genres).map(genre =>
-        genre.map((gen, i) => (
-          <span className="badge badge-light mr-2" key={i}>
-            {gen.name}
+      movieGen = Object.keys(genres).map((genre, i) => {
+        return (
+          <span className="movie__details--info--badge" key={i}>
+            {genres[genre].name}
           </span>
-        ))
-      );
+        );
+      });
     }
 
     if (movieDetails === undefined || Object.keys(movieDetails).length === 0) {
       return <Spinner />;
     } else {
       return (
-        <div
-          className="movie__details"
-          style={{
-            backgroundImage: `url(${
-              movieDetails.backdrop_path
-                ? BACKDROP_PATH + movieDetails.poster_path
-                : errorPosterPath
-            })`
-          }}
-        >
-          <div className="movie__details--info">
-            <Overdrive id={`${movieDetails.id}`}>
+        <div className="movie__details">
+          <div className="movie__details--container">
+            <div className="movie__details--info">
               <img
                 className="movie__details-poster"
                 src={
                   movieDetails.poster_path
-                    ? POSTER_PATH + movieDetails.poster_path
+                    ? BACKDROP_PATH + movieDetails.poster_path
                     : defaultBackdrop
                 }
                 alt="Poster"
               />
-            </Overdrive>
-            <div className="info movie__details--box">
-              <h2 className="movie__details--info-title">
-                {movieDetails.title ? movieDetails.title : movieDetails.name}{" "}
-                <span className="movie__details--runtime">
+              <div className="movie__details--box">
+                <h2 className="movie__details--info-title">
+                  {movieDetails.title ? movieDetails.title : movieDetails.name}{" "}
+                </h2>
+                <h5 className="movie__details--runtime">
                   <i className="far fa-clock" />{" "}
                   {movieDetails.runtime
                     ? this.getRuntime()
                     : `${movieDetails.number_of_seasons} Seasons ${
                         movieDetails.number_of_episodes
                       } Episodes`}
-                </span>
-              </h2>
-              <StarRatings
-                rating={
-                  movieDetails.vote_average ? movieDetails.vote_average / 2 : 5
-                }
-                starRatedColor="#FF982C"
-                numberOfStars={5}
-                starDimension="25px"
-                starSpacing="3px"
-                name="rating"
-              />
-              <h3 className="mt-4">
-                <span className="mr-3 movie__details--info-date">
+                  <span className="movie__details--star-ratings">
+                    <StarRatings
+                      rating={
+                        movieDetails.vote_average
+                          ? movieDetails.vote_average / 2
+                          : 5
+                      }
+                      starRatedColor="#FF982C"
+                      numberOfStars={5}
+                      starDimension="25px"
+                      starSpacing="3px"
+                      name="rating"
+                    />
+                  </span>
+                </h5>
+
+                <h5 className="movie__details--info-date">
                   {" "}
                   {movieDetails.release_date
                     ? movieDetails.release_date
                     : movieDetails.first_air_date}
-                </span>
-                <span className="movie__details--genre">{movieGen}</span>
-              </h3>
-              <p>{movieDetails.overview}</p>
+                </h5>
+                <p className="movie__details--genre">{movieGen}</p>
+                <p className="movie__details--des">{movieDetails.overview}</p>
+              </div>
             </div>
+            <MovieList
+              path="movie"
+              category="Recommendations"
+              link="popular"
+              movies={popularMovies.results}
+            />
           </div>
         </div>
       );
@@ -115,15 +116,15 @@ class MovieDetails extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    movieDetails: state.movies.movie,
-    movieIdPath: ownProps.match
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  movieDetails: state.movies.movie,
+  movieIdPath: ownProps.match,
+  popularMovies: state.movies.popularMovies
+});
 
 const mapDispatchToProps = {
-  getMovieDetails
+  getMovieDetails,
+  getPopularMovies
 };
 
 export default connect(

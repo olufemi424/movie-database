@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import Movie from "./Movie";
 import Spinner from "../layouts/Spinner";
@@ -19,7 +19,7 @@ class MovieList extends Component {
       return <Spinner />;
     }
     return (
-      <React.Fragment>
+      <Fragment>
         <div>
           <h2 className="category__title">
             {" "}
@@ -29,7 +29,7 @@ class MovieList extends Component {
         <div className="category__card">
           <div className="card__outer">{movieResults}</div>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
