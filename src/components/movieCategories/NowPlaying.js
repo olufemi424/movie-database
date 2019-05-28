@@ -1,30 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMovies } from "../../store/actions/movieActions";
+import { discoverMoviesAction } from "../../store/actions/movieActions";
 
 import MovieGrid from "../movieComponents/MovieGrid";
 
 class NowPlaying extends Component {
   componentDidMount() {
-    this.props.fetchMovies();
+    this.props.discoverMoviesAction();
   }
   render() {
-    const { movies } = this.props;
+    const { discoverMovies } = this.props;
 
     return (
       <div>
-        <MovieGrid movies={movies} component="Now Playing" path="movie" />
+        <MovieGrid
+          movies={discoverMovies}
+          component="Now Playing"
+          path="movie"
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  movies: state.movies.movies
+  discoverMovies: state.movies.discoverMovies
 });
 
 const mapDispatchToProps = {
-  fetchMovies
+  discoverMoviesAction
 };
 
 export default connect(

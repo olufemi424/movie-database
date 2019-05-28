@@ -32,6 +32,10 @@ const Movie = props => {
     route = "movie";
   }
 
+  // const movieSelectedHandler = id => {
+  //   // this.props.history.push(`/${route}/${movie.id}`);
+  // };
+
   return (
     <Link to={`/${route}/${movie.id}`}>
       <Overdrive id={`${movie.id}`}>
@@ -66,8 +70,6 @@ const Movie = props => {
   );
 };
 
-export default withRouter(Movie);
-
 // //check for proptypes
 Movie.propTypes = {
   movie: PropTypes.shape({
@@ -80,3 +82,5 @@ Movie.propTypes = {
 Movie.defaultProps = {
   desc: "Description not available"
 };
+
+export default withRouter(Movie);
