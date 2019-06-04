@@ -1,15 +1,5 @@
 import axios from "axios";
-import {
-  GET_DISCOVER_MOVIES,
-  GET_MOVIES_SEARCH,
-  GET_MOVIE_DETAILS,
-  GET_TRENDING_MOVIES,
-  GET_POPULAR_MOVIES,
-  GET_POPULAR_SHOWS,
-  GET_RECOMMENATION,
-  GET_TOP_RATED_SERIES,
-  ERROR_FETCHING_MOVIES
-} from "./types";
+import * as TYPES from "./types";
 
 const baseURL = "https://api.themoviedb.org/3";
 const API_KEY = "56cbdfc579474a601e5ee545721a625f";
@@ -24,12 +14,12 @@ export const movieSearch = keyword => {
       )
       .then(({ data }) => {
         dispatch({
-          type: GET_MOVIES_SEARCH,
+          type: TYPES.GET_MOVIES_SEARCH,
           payload: data
         });
       })
       .catch(err => {
-        dispatch({ type: ERROR_FETCHING_MOVIES, err });
+        dispatch({ type: TYPES.ERROR_FETCHING_MOVIES, err });
       });
   };
 };
@@ -41,11 +31,11 @@ export const getMovieDetails = movieId => async dispatch => {
       `${baseURL + movieId}?api_key=${API_KEY}&language=en-US`
     );
     dispatch({
-      type: GET_MOVIE_DETAILS,
+      type: TYPES.GET_MOVIE_DETAILS,
       payload: res.data
     });
   } catch (err) {
-    dispatch({ type: ERROR_FETCHING_MOVIES, payload: err });
+    dispatch({ type: TYPES.ERROR_FETCHING_MOVIES, payload: err });
   }
 };
 
@@ -56,11 +46,11 @@ export const discoverMoviesAction = (page = 1) => async dispatch => {
       `${baseURL}/discover/movie?api_key=${API_KEY}&language=en-US&page=${page}`
     );
     dispatch({
-      type: GET_DISCOVER_MOVIES,
+      type: TYPES.GET_DISCOVER_MOVIES,
       payload: res.data
     });
   } catch (err) {
-    dispatch({ type: ERROR_FETCHING_MOVIES, payload: err });
+    dispatch({ type: TYPES.ERROR_FETCHING_MOVIES, payload: err });
   }
 };
 
@@ -71,11 +61,11 @@ export const getTrendingMovies = () => async dispatch => {
       `${baseURL}/trending/movie/week?api_key=${API_KEY}&language=en-US`
     );
     dispatch({
-      type: GET_TRENDING_MOVIES,
+      type: TYPES.GET_TRENDING_MOVIES,
       payload: res.data
     });
   } catch (err) {
-    dispatch({ type: ERROR_FETCHING_MOVIES, payload: err });
+    dispatch({ type: TYPES.ERROR_FETCHING_MOVIES, payload: err });
   }
 };
 
@@ -83,14 +73,17 @@ export const getTrendingMovies = () => async dispatch => {
 export const getPopularMovies = () => async dispatch => {
   try {
     const res = await axios.get(
-      `${baseURL}/trending/movie/week?api_key=${API_KEY}&language=en-US`
+      `${baseURL}/movie/popular?api_key=${API_KEY}&language=en-US`
     );
     dispatch({
-      type: GET_POPULAR_MOVIES,
+      type: TYPES.GET_POPULAR_MOVIES,
       payload: res.data
     });
   } catch (err) {
-    dispatch({ type: ERROR_FETCHING_MOVIES, payload: err });
+    dispatch({
+      type: TYPES.ERROR_FETCHING_MOVIES,
+      payload: err
+    });
   }
 };
 
@@ -102,11 +95,11 @@ export const getRecommendationMovies = movieId => async dispatch => {
       `${baseURL}${movieId}/similar?api_key=${API_KEY}&language=en-US&page=1`
     );
     dispatch({
-      type: GET_RECOMMENATION,
+      type: TYPES.GET_RECOMMENATION,
       payload: res.data
     });
   } catch (err) {
-    dispatch({ type: ERROR_FETCHING_MOVIES, payload: err });
+    dispatch({ type: TYPES.ERROR_FETCHING_MOVIES, payload: err });
   }
 };
 
@@ -117,11 +110,11 @@ export const getPopularTvShows = () => async dispatch => {
       `${baseURL}/tv/on_the_air?api_key=${API_KEY}&language=en-US`
     );
     dispatch({
-      type: GET_POPULAR_SHOWS,
+      type: TYPES.GET_POPULAR_SHOWS,
       payload: res.data
     });
   } catch (err) {
-    dispatch({ type: ERROR_FETCHING_MOVIES, payload: err });
+    dispatch({ type: TYPES.ERROR_FETCHING_MOVIES, payload: err });
   }
 };
 
@@ -132,10 +125,10 @@ export const getTopRatedTvShows = () => async dispatch => {
       `${baseURL}/tv/top_rated?api_key=${API_KEY}&language=en-US`
     );
     dispatch({
-      type: GET_TOP_RATED_SERIES,
+      type: TYPES.GET_TOP_RATED_SERIES,
       payload: res.data
     });
   } catch (err) {
-    dispatch({ type: ERROR_FETCHING_MOVIES, payload: err });
+    dispatch({ type: TYPES.ERROR_FETCHING_MOVIES, payload: err });
   }
 };
