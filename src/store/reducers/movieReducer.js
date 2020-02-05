@@ -1,21 +1,13 @@
-import {
-  GET_MOVIES,
-  GET_MOVIES_SEARCH,
-  GET_MOVIE_DETAILS,
-  GET_TRENDING_MOVIES,
-  GET_POPULAR_MOVIES,
-  GET_POPULAR_SHOWS,
-  GET_TOP_RATED_SERIES,
-  ERROR_FETCHING_MOVIES
-} from "../actions/types";
+import * as TYPES from "../actions/types";
 
 const initState = {
   movies: [],
-  movie: {},
+  discoverMovies: {},
   trendingMovies: {},
   popularMovies: {},
   popularSeries: {},
   topRatedSeries: {},
+  recommendations: {},
   movieSearchResult: {},
   searchKeyword: "batman",
   errors: null
@@ -23,42 +15,47 @@ const initState = {
 
 const movieReducer = (state = initState, action) => {
   switch (action.type) {
-    case GET_MOVIES:
-      return {
-        ...state,
-        movies: action.payload
-      };
-    case GET_MOVIE_DETAILS:
+    case TYPES.GET_MOVIE_DETAILS:
       return {
         ...state,
         movie: action.payload
       };
-    case GET_MOVIES_SEARCH:
+    case TYPES.GET_DISCOVER_MOVIES:
+      return {
+        ...state,
+        discoverMovies: action.payload
+      };
+    case TYPES.GET_MOVIES_SEARCH:
       return {
         ...state,
         movieSearchResult: action.payload
       };
-    case GET_TRENDING_MOVIES:
+    case TYPES.GET_TRENDING_MOVIES:
       return {
         ...state,
         trendingMovies: action.payload
       };
-    case GET_POPULAR_MOVIES:
+    case TYPES.GET_POPULAR_MOVIES:
       return {
         ...state,
         popularMovies: action.payload
       };
-    case GET_POPULAR_SHOWS:
+    case TYPES.GET_RECOMMENATION:
+      return {
+        ...state,
+        recommendations: action.payload
+      };
+    case TYPES.GET_POPULAR_SHOWS:
       return {
         ...state,
         popularSeries: action.payload
       };
-    case GET_TOP_RATED_SERIES:
+    case TYPES.GET_TOP_RATED_SERIES:
       return {
         ...state,
         topRatedSeries: action.payload
       };
-    case ERROR_FETCHING_MOVIES:
+    case TYPES.ERROR_FETCHING_MOVIES:
       return {
         ...state,
         errors: action.payload

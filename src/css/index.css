@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+@import url("https://fonts.googleapis.com/css?family=Ramabhadra&display=swap");
 
 * {
   margin: 0;
@@ -292,41 +293,66 @@ a {
 
 .movie__details {
   position: relative;
-  padding-top: 56vh;
-  width: 100%;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  object-fit: cover;
-  overflow: hidden;
-}
-
-.movie__details--info {
+  padding-top: 100px;
   background-image: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.3) 0%,
     rgba(0, 0, 0, 1) 50%,
     rgba(0, 0, 0, 1) 100%
   );
+}
+
+.movie__details--container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.movie__details--info {
   color: #f4f4f4;
-  text-align: left;
   padding: 2rem 5%;
   display: flex;
-  grid-template-columns: repeat(2, 2fr);
+  height: 50vh;
+}
+
+.movie__details-poster {
+  width: 350px;
+  height: 100%;
+  margin-right: 30px;
 }
 
 .movie__details--box {
-  margin-left: 30px;
+  align-self: flex-end;
 }
 
 .movie__details--info-title {
-  margin-bottom: 20px;
+  font-family: "Ramabhadra", sans-serif;
+  font-size: 50px;
 }
 
+.movie__details--runtime {
+  letter-spacing: 1.5px;
+}
+
+.movie__details--des {
+  margin-bottom: -10px;
+}
+
+.movie__details--star-ratings {
+  margin-left: 15px;
+}
 .movie__details--info-date {
   margin-bottom: 20px;
 }
 
+.movie__details--info--badge {
+  background-color: #c6c6c6;
+  margin-right: 8px;
+  border-radius: 5px;
+  padding: 2px 7px;
+  color: #000;
+}
+
+/* 
 .movie__details--genre {
   font-size: 16px;
 }
@@ -338,12 +364,7 @@ a {
   background: #000;
 }
 
-.movie__details--runtime {
-  font-size: 14px;
-  letter-spacing: 1.5px;
-  font-weight: bold;
-  margin-left: 20px;
-}
+ */
 
 /*=====  End of MOVIES DETAILS  ======*/
 

@@ -4,10 +4,11 @@ import MovieList from "./movieComponents/MovieList";
 
 import {
   getPopularTvShows,
-  fetchMovies,
+  discoverMoviesAction,
   getTrendingMovies,
   getPopularMovies,
-  getTopRatedTvShows
+  getTopRatedTvShows,
+  getRecommendationMovies
 } from "../store/actions/movieActions";
 
 // import Carousel from "./movieComponents/Carousel";
@@ -15,15 +16,16 @@ import {
 class MovieDb extends Component {
   componentDidMount() {
     this.props.getPopularTvShows();
-    this.props.fetchMovies();
+    this.props.discoverMoviesAction();
     this.props.getTrendingMovies();
     this.props.getPopularMovies();
     this.props.getTopRatedTvShows();
+    this.props.getRecommendationMovies();
   }
 
   render() {
     const {
-      movies,
+      discoverMovies,
       popularMovies,
       trendingMovies,
       popularSeries,
@@ -38,7 +40,7 @@ class MovieDb extends Component {
             path="movie"
             category="Now Playing"
             link="nowplaying"
-            movies={movies.results}
+            movies={discoverMovies.results}
           />
           <MovieList
             path="movie"
@@ -71,7 +73,7 @@ class MovieDb extends Component {
 }
 
 const mapStateToProps = state => ({
-  movies: state.movies.movies,
+  discoverMovies: state.movies.discoverMovies,
   popularMovies: state.movies.popularMovies,
   trendingMovies: state.movies.trendingMovies,
   popularSeries: state.movies.popularSeries,
@@ -80,10 +82,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getPopularTvShows,
-  fetchMovies,
+  discoverMoviesAction,
   getTrendingMovies,
   getPopularMovies,
-  getTopRatedTvShows
+  getTopRatedTvShows,
+  getRecommendationMovies
 };
 
 export default connect(

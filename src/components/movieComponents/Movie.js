@@ -7,6 +7,20 @@ import StarRatings from "react-star-ratings";
 
 const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
 
+const limitMovieTitle = (title, limit = 12) => {
+  const newTitle = [];
+  if (title.length > limit) {
+    title.split(" ").reduce((acc, cur) => {
+      if (acc + cur.length <= limit) {
+        newTitle.push(cur);
+      }
+      return acc + cur.length;
+    }, 0);
+    return `${newTitle.join(" ")} ...`;
+  }
+  return title;
+};
+
 const Movie = props => {
   const { movie, path } = props;
   let route;
@@ -17,6 +31,10 @@ const Movie = props => {
   } else {
     route = "movie";
   }
+
+  // const movieSelectedHandler = id => {
+  //   // this.props.history.push(`/${route}/${movie.id}`);
+  // };
 
   return (
     <Link to={`/${route}/${movie.id}`}>
@@ -33,8 +51,8 @@ const Movie = props => {
           />
           <h6 className="flex__item-title">
             {movie.title
-              ? movie.title.substring(0, 20)
-              : movie.name.substring(0, 20)}{" "}
+              ? limitMovieTitle(movie.title)
+              : limitMovieTitle(movie.name)}{" "}
           </h6>
           <div style={{ width: 100, margin: "0 auto" }}>
             <StarRatings
@@ -52,8 +70,6 @@ const Movie = props => {
   );
 };
 
-export default withRouter(Movie);
-
 // //check for proptypes
 Movie.propTypes = {
   movie: PropTypes.shape({
@@ -66,3 +82,5 @@ Movie.propTypes = {
 Movie.defaultProps = {
   desc: "Description not available"
 };
+
+export default withRouter(Movie);
