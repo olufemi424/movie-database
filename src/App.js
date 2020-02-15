@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Nav from "./components/layouts/Nav";
+import Nav from "./components/layouts/Navigation/Nav";
 import MoviesSearchResult from "./components/movieComponents/MoviesSearchResult";
-import MovieDb from "./components/MovieDb";
+import Movo from "./components/Movo";
 import MovieDetails from "./components/movieComponents/MovieDetails";
 import NowTrending from "./components/movieCategories/NowTrending";
 import NowPlaying from "./components/movieCategories/NowPlaying";
@@ -12,23 +12,23 @@ import TopRatedShows from "./components/movieCategories/TopRatedShows";
 import Footer from "./components/layouts/Footer";
 
 const App = () => (
-  <Router>
-    <div className="App">
-      <Nav />
-      <Switch>
-        <Route exact path="/" component={MovieDb} />
-        <Route path="/search/:keyword" component={MoviesSearchResult} />
-        <Route path="/movie/" component={MovieDetails} />
-        <Route path="/tv/" component={MovieDetails} />
-        <Route path="/nowtrending" component={NowTrending} />
-        <Route path="/nowplaying" component={NowPlaying} />
-        <Route path="/popular" component={Popular} />
-        <Route path="/shows" component={TvShows} />
-        <Route path="/topshows" component={TopRatedShows} />
-      </Switch>
-      <Footer />
-    </div>
-  </Router>
+	<Router>
+		<div className="App">
+			<Nav />
+			<Switch>
+				<Route exact path="/" component={Movo} />
+				<Route path="/search/:keyword" component={MoviesSearchResult} />
+				<Route path="/movie/" component={MovieDetails} />
+				<Route path="/tv/" component={MovieDetails} />
+				<Route path="/nowtrending" component={NowTrending} />
+				<Route path="/nowplaying" component={NowPlaying} />
+				<Route path="/popular" component={Popular} />
+				<Route path="/shows" component={TvShows} />
+				<Route path="/topshows" component={TopRatedShows} />
+			</Switch>
+			<Footer />
+		</div>
+	</Router>
 );
 
 export default App;
