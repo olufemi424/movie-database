@@ -1,53 +1,46 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { movieSearch } from "../../store/actions/movieActions";
 
-class Search extends Component {
-  state = {
-    keyword: ""
-  };
+const Search = props => {
+	let [searchTerm, setSearchTerm] = useState("");
 
-  handleChange = e => {
-    this.setState({
-      keyword: e.target.value
-    });
-  };
+	const handleChange = e => {
+		setSearchTerm(e.target.value);
+	};
 
-  searchMovie = e => {
-    e.preventDefault();
-    this.props.movieSearch(this.state.keyword);
-    this.props.history.push(`/search/${this.state.keyword}`);
-  };
+	const searchMovie = e => {
+		console.log(searchTerm);
+		e.preventDefault();
+		props.movieSearch(searchTerm);
+		props.history.push(`/search/${searchTerm}`);
+		setSearchTerm("");
+	};
 
-  render() {
-    return (
-      <React.Fragment>
-        <form onSubmit={this.searchMovie} className="search">
-          <input
-            type="text"
-            className="search__input"
-            placeholder="Search For Movies"
-            onChange={this.handleChange}
-            required
-          />
-          <button className="search__button">
-            <i className="fas fa-search search__icon" />
-          </button>
-        </form>
-      </React.Fragment>
-    );
-  }
-}
-
-const mapDispatchToProps = {
-  movieSearch
+	return (
+		<React.Fragment>
+			<form onSubmit={searchMovie} className="search">
+				<input
+					type="text"
+					className="search__input"
+					placeholder="Search For Movies"
+					onChange={handleChange}
+					required
+				/>
+				<button className="search__button">
+					<i className="fas fa-search search__icon" />
+				</button>
+			</form>
+		</React.Fragment>
+	);
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withRouter(Search));
+const mapDispatchToProps = {
+	movieSearch
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(Search));
 
 // import { NextButton, PrevButton } from "./movieActionsButton/NextButton";
 

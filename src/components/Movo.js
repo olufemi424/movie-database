@@ -29,7 +29,7 @@ const Movo = props => {
 			{/* <Carousel movies={movies} /> */}
 
 			<div className="categories">
-				<Carousel></Carousel>
+				{/* <Carousel></Carousel> */}
 				<MovieList
 					path="movie"
 					category="Now Playing"

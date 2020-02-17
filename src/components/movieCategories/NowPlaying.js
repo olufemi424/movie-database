@@ -1,37 +1,27 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { discoverMoviesAction } from "../../store/actions/movieActions";
 
 import MovieGrid from "../movieComponents/MovieGrid";
 
-class NowPlaying extends Component {
-  componentDidMount() {
-    this.props.discoverMoviesAction();
-  }
-  render() {
-    const { discoverMovies } = this.props;
+const NowPlaying = ({ discoverMoviesAction, discoverMovies }) => {
+	useEffect(() => {
+		discoverMoviesAction();
+	}, []);
 
-    return (
-      <div>
-        <MovieGrid
-          movies={discoverMovies}
-          component="Now Playing"
-          path="movie"
-        />
-      </div>
-    );
-  }
-}
+	return (
+		<div>
+			<MovieGrid movies={discoverMovies} component="Now Playing" path="movie" />
+		</div>
+	);
+};
 
 const mapStateToProps = state => ({
-  discoverMovies: state.movies.discoverMovies
+	discoverMovies: state.movies.discoverMovies
 });
 
 const mapDispatchToProps = {
-  discoverMoviesAction
+	discoverMoviesAction
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NowPlaying);
+export default connect(mapStateToProps, mapDispatchToProps)(NowPlaying);
